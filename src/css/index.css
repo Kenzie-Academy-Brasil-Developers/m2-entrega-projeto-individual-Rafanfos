@@ -1,0 +1,48 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+}
+
+#login-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#login:hover {
+  scale: 1.2;
+}
+
+#register:hover {
+  scale: 1.2;
+}
+
+.container {
+  margin: 0 8%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form {
+  display: flex;
+  gap: 30px;
+}
+
+.companies {
+  display: flex;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  #login-register {
+    flex-direction: row;
+    gap: 20px;
+  }
+}
