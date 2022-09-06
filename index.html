@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./src/css/global.css" />
+    <link rel="stylesheet" href="./src/css/background.css" />
+    <link rel="stylesheet" href="./src/css/fonts.css" />
+    <link rel="stylesheet" href="./src/css/colors.css" />
+    <link rel="stylesheet" href="./src/css/index.css" />
+
+    <link rel="icon" href="./src/assets/favicon.jpg" />
+
+    <title>QubitCompany - 0, 1, ou mais soluções para sua empresa</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h2 class="title2 grey3">QubitCompany</h2>
+      </div>
+      <nav>
+        <div id="login-register">
+          <span id="login" class="text3 grey3 button">Login</span>
+          <span id="register" class="text3 grey3 button">Cadastro</span>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <h2 class="title2">Empresas participantes</h2>
+      <form>
+        <label class="text1" for="sector_filter">Filtrar por setor</label>
+        <select id="sector_filter">
+          <option></option>
+        </select>
+      </form>
+      <ul id="companies"></ul>
+    </main>
+  </body>
+  <script type="module" src="./src/js/index.js"></script>
+</html>

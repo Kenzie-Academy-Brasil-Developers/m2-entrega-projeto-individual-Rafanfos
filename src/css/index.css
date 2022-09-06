@@ -1,0 +1,85 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+}
+
+#login-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#login:hover {
+  scale: 1.2;
+}
+
+#register:hover {
+  scale: 1.2;
+}
+
+.container {
+  margin: 0 8%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form {
+  display: flex;
+  gap: 30px;
+}
+
+#companies {
+  display: flex;
+  align-items: center;
+  width: 95%;
+  height: 200px;
+  gap: 30px;
+  /* animation: appear 3s; */
+  overflow: auto;
+  overflow-y: hidden;
+  animation: appear 1s;
+}
+
+.card {
+  min-width: 85%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 5px;
+  padding: 10px;
+  box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  margin: 10px;
+  border-radius: 8px;
+  animation: appear 1s;
+}
+
+@keyframes appear {
+  0% {
+    transform: rotate(0);
+    filter: blur(16px);
+  }
+
+  50% {
+    transform: rotate(360deg);
+    filter: blur(4px);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@media (min-width: 768px) {
+  #login-register {
+    flex-direction: row;
+    gap: 20px;
+  }
+}
