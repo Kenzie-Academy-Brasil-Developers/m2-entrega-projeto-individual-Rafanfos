@@ -35,9 +35,7 @@ export class ApiRequests {
       body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
-      .then((resp) => {
-        console.log(resp);
-      })
+      .then((resp) => {})
       .catch((erro) => console.log(erro));
   }
 }

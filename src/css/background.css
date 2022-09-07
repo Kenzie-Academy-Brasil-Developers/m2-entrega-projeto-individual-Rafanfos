@@ -10,6 +10,10 @@ header {
   background-color: var(--primary);
 }
 
+#login-field {
+  background-color: var(--primary);
+}
+
 input {
   background-color: var(--primary-light);
 }
@@ -18,6 +22,7 @@ input {
   background-color: var(--primary-light);
 }
 
-#register-button {
+#register-button,
+#login-button {
   background-color: #ffff;
 }

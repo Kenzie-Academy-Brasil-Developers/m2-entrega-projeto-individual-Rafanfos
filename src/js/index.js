@@ -81,7 +81,7 @@ class HomePage {
     });
   }
 
-  static openModal() {
+  static openRegister() {
     const register = document.querySelector("#register");
     const modal = document.querySelector(".register");
 
@@ -90,8 +90,8 @@ class HomePage {
     });
   }
 
-  static closeModal() {
-    const close = document.querySelector(".close");
+  static closeRegister() {
+    const close = document.querySelector("#close-register");
     const modal = document.querySelector(".register");
 
     close.addEventListener("click", () => {
@@ -110,13 +110,33 @@ class HomePage {
       event.preventDefault();
 
       const body = {
-        username: username.value,
-        email: email.value,
         password: password.value,
-        proflevel: proflevel.value,
+        email: email.value,
+        professional_level: proflevel.value.toLowerCase(),
+        username: username.value,
       };
 
       ApiRequests.registerRequest(body);
+
+      event.preventDefault();
+    });
+  }
+
+  static openLogin() {
+    const login = document.querySelector("#login");
+    const modal = document.querySelector(".login");
+
+    login.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeLogin() {
+    const close = document.querySelector("#close-login");
+    const modal = document.querySelector(".login");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
     });
   }
 }
@@ -124,6 +144,5 @@ class HomePage {
 HomePage.getCompanies();
 HomePage.getSectors();
 HomePage.filterCompanies();
-HomePage.openModal();
-HomePage.closeModal();
-HomePage.register();
+HomePage.openLogin();
+HomePage.closeLogin();
