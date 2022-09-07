@@ -37,8 +37,6 @@ class Register {
       };
 
       ApiRequests.registerRequest(body);
-
-      event.preventDefault();
     });
   }
 }
