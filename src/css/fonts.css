@@ -1,3 +1,8 @@
+.title1 {
+  font-size: var(--title-1-size);
+  font-weight: var(--title-1-weight);
+}
+
 .title2 {
   font-size: var(--title-2-size);
   font-weight: var(--title-2-weight);

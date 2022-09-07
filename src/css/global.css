@@ -34,10 +34,6 @@
   --primary-dark: #20130a;
 }
 
-body {
-  width: 100vw;
-}
-
 .button {
   cursor: pointer;
 }

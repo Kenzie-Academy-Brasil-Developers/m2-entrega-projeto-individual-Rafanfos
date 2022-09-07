@@ -3,13 +3,19 @@ import { ApiRequests } from "./requests.js";
 class HomePage {
   static async getCompanies() {
     const companies = await ApiRequests.companiesRequest();
-    console.log(companies);
+
     this.createCompanyCards(companies);
   }
 
   static createCompanyCards(companies) {
-    const companiesList = document.querySelector("#companies");
-    companiesList.innerHTML = "";
+    const body = document.querySelector("body");
+    body.style.setProperty("--length", companies.length);
+    body.style.setProperty("--time", `${companies.length * 5}s`);
+
+    const companiesArea = document.querySelector("#companies_section");
+    companiesArea.innerHTML = "";
+
+    const companiesList = document.createElement("ul");
 
     companies.forEach(({ description, name, sectors }) => {
       const card = document.createElement("li");
@@ -28,8 +34,15 @@ class HomePage {
       companySector.innerText = sectors.description;
       companyDescription.innerText = description;
 
+      companiesList.id = "companies";
+
       card.append(companyName, companySector, companyDescription);
       companiesList.append(card);
+      companiesArea.append(companiesList);
+
+      setTimeout(() => {
+        card.classList.add("transition");
+      }, 2000);
     });
   }
 
@@ -67,8 +80,69 @@ class HomePage {
       this.createCompanyCards(filtered);
     });
   }
+
+  static openRegister() {
+    const register = document.querySelector("#register");
+    const modal = document.querySelector(".register");
+
+    register.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeRegister() {
+    const close = document.querySelector("#close-register");
+    const modal = document.querySelector(".register");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static register() {
+    const registerButton = document.querySelector("#register-button");
+    const username = document.querySelector("#register_username");
+    const email = document.querySelector("#register_email");
+    const password = document.querySelector("#register_password");
+    const proflevel = document.querySelector("#register_proflevel");
+
+    registerButton.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const body = {
+        password: password.value,
+        email: email.value,
+        professional_level: proflevel.value.toLowerCase(),
+        username: username.value,
+      };
+
+      ApiRequests.registerRequest(body);
+
+      event.preventDefault();
+    });
+  }
+
+  static openLogin() {
+    const login = document.querySelector("#login");
+    const modal = document.querySelector(".login");
+
+    login.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeLogin() {
+    const close = document.querySelector("#close-login");
+    const modal = document.querySelector(".login");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
 }
 
 HomePage.getCompanies();
 HomePage.getSectors();
 HomePage.filterCompanies();
+HomePage.openLogin();
+HomePage.closeLogin();

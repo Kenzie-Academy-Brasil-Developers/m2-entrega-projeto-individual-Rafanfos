@@ -5,3 +5,24 @@ header {
 .card {
   background-color: var(--primary-light);
 }
+
+#register-field {
+  background-color: var(--primary);
+}
+
+#login-field {
+  background-color: var(--primary);
+}
+
+input {
+  background-color: var(--primary-light);
+}
+
+.relocation_area {
+  background-color: var(--primary-light);
+}
+
+#register-button,
+#login-button {
+  background-color: #ffff;
+}
