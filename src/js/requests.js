@@ -27,4 +27,17 @@ export class ApiRequests {
 
     return sectors;
   }
+
+  static async registerRequest(body) {
+    const registerResp = await fetch(`${this.baseUrl}auth/register/user`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => console.log(erro));
+  }
 }

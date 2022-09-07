@@ -16,14 +16,14 @@
     <title>QubitCompany - 0, 1, ou mais soluções para sua empresa</title>
   </head>
   <body>
-    <header>
+    <header class="white">
       <div>
-        <h2 class="title2 grey3">QubitCompany</h2>
+        <h2 class="title2">QubitCompany</h2>
       </div>
       <nav>
         <div id="login-register">
-          <span id="login" class="text3 grey3 button">Login</span>
-          <span id="register" class="text3 grey3 button">Cadastro</span>
+          <span id="login" class="text3 button">Login</span>
+          <span id="register" class="text3 button">Cadastro</span>
         </div>
       </nav>
     </header>
@@ -35,7 +35,45 @@
           <option></option>
         </select>
       </form>
-      <ul id="companies"></ul>
+      <section id="companies_section"></section>
+      <section class="modal-wrapper register hidden">
+        <div id="register-field">
+          <img class="close button" src="./src/assets/close.png" />
+          <h2 class="title1 white">Cadastro</h2>
+          <form>
+            <input
+              id="register_username"
+              type="text"
+              placeholder="Digite o nome de usuário"
+            />
+            <input
+              id="register_email"
+              class="grey1"
+              type="text"
+              placeholder="Digite o e-mail"
+            />
+            <input
+              id="register_password"
+              class="grey1"
+              type="password"
+              placeholder="Digite a senha"
+            />
+            <input
+              id="register_proflevel"
+              class="grey1"
+              type="text"
+              placeholder="Digite seu nível profissional"
+            />
+            <button id="register-button" class="button grey1 text1">
+              Cadastrar
+            </button>
+          </form>
+          <span class="white">Já tem conta?</span>
+          <div class="relocation_area button">
+            <span class="grey1">Ir para a página de login</span>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
   <script type="module" src="./src/js/index.js"></script>
