@@ -24,7 +24,7 @@ class Login {
     const email = document.querySelector("#login_email");
     const password = document.querySelector("#login_password");
 
-    loginButton.addEventListener("click", (event) => {
+    loginButton.addEventListener("click", async (event) => {
       event.preventDefault();
 
       const body = {
@@ -34,7 +34,7 @@ class Login {
 
       console.log(body);
 
-      ApiRequests.registerRequest(body);
+      await ApiRequests.loginRequest(body);
     });
   }
 }

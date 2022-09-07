@@ -1,0 +1,147 @@
+body {
+  background-color: var(--primary-light);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+}
+
+header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+#logout:hover {
+  scale: 1.2;
+}
+
+.container {
+  margin: 10px 8%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#greetings_area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#greetings_area > p {
+  text-align: center;
+}
+
+.actions {
+  margin-top: 20px;
+  height: 90%;
+}
+
+#actions_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#actions_list > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid lightgrey;
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  font-size: 14px;
+}
+#actions_list > li:hover {
+  color: rgba(185, 0, 0, 0.6);
+  border: 3px solid rgba(185, 0, 0, 0.6);
+  box-shadow: none;
+  transform: translateX(0px) translateY(5px);
+}
+
+.sectors {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+#sector_list {
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+  height: 42px;
+  border-radius: 8px;
+}
+
+.card2:hover {
+  scale: 1.5;
+  transition: smooth;
+}
+
+.card2 > img {
+  width: 30px;
+}
+
+#return_menu {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  width: 100px;
+}
+
+@media (min-width: 768px) {
+  #sector_list {
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 20px;
+    width: 90%;
+  }
+
+  .card2 {
+    width: 200px;
+    height: 100px;
+    margin: 0 10px;
+  }
+
+  .card2:hover {
+    scale: 1.5;
+  }
+
+  .card2 > img {
+    width: 80px;
+  }
+}

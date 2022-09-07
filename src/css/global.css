@@ -13,6 +13,8 @@
   --primary-light: #e9f0c9;
   --primary-dark: #123142;
 
+  --default: #ffff;
+
   --grey-1: #0a0c0d;
   --grey-2: #495057;
   --grey-3: #dee2e6;
@@ -32,6 +34,8 @@
   --primary: #142026;
   --primary-light: #123142;
   --primary-dark: #20130a;
+
+  --default: #0000;
 }
 
 .button {

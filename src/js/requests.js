@@ -28,7 +28,7 @@ export class ApiRequests {
     return sectors;
   }
 
-  static async registerRequest(body) {
+  static async registerTryRequest(body) {
     const registerResp = await fetch(`${this.baseUrl}auth/register/user`, {
       method: "POST",
       headers: this.headers,
@@ -39,8 +39,8 @@ export class ApiRequests {
       .catch((erro) => console.log(erro));
   }
 
-  static async registerRequest(body) {
-    const registerResp = await fetch(`${this.baseUrl}auth/login`, {
+  static async loginRequest(body) {
+    const loginResp = await fetch(`${this.baseUrl}auth/login`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify(body),
@@ -59,5 +59,19 @@ export class ApiRequests {
         }
       })
       .catch((erro) => console.log(erro));
+  }
+
+  static async getSectors() {
+    const sectors = await fetch(`${this.baseUrl}sectors`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        return resp;
+      })
+      .catch((erro) => console.log(erro));
+
+    return sectors;
   }
 }

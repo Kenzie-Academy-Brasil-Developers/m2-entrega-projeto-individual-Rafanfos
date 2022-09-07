@@ -19,14 +19,14 @@ class Register {
     });
   }
 
-  static createRegister() {
+  static async createRegister() {
     const registerButton = document.querySelector("#register-button");
     const username = document.querySelector("#register_username");
     const email = document.querySelector("#register_email");
     const password = document.querySelector("#register_password");
     const proflevel = document.querySelector("#register_proflevel");
 
-    registerButton.addEventListener("click", (event) => {
+    registerButton.addEventListener("click", async (event) => {
       event.preventDefault();
 
       const body = {
@@ -36,7 +36,7 @@ class Register {
         username: username.value,
       };
 
-      ApiRequests.registerRequest(body);
+      await ApiRequests.registerTryRequest(body);
     });
   }
 }

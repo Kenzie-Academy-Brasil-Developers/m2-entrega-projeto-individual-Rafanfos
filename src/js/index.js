@@ -23,7 +23,7 @@ class HomePage {
       const companySector = document.createElement("span");
       const companyDescription = document.createElement("p");
 
-      card.classList.add("card");
+      card.classList.add("card1");
       companyName.classList.add("title3");
       companyName.classList.add("grey1");
       companySector.classList.add("text3");
@@ -78,47 +78,6 @@ class HomePage {
       const filtered = await ApiRequests.filterBySector(selected);
 
       this.createCompanyCards(filtered);
-    });
-  }
-
-  static openRegister() {
-    const register = document.querySelector("#register");
-    const modal = document.querySelector(".register");
-
-    register.addEventListener("click", () => {
-      modal.classList.toggle("hidden");
-    });
-  }
-
-  static closeRegister() {
-    const close = document.querySelector("#close-register");
-    const modal = document.querySelector(".register");
-
-    close.addEventListener("click", () => {
-      modal.classList.toggle("hidden");
-    });
-  }
-
-  static register() {
-    const registerButton = document.querySelector("#register-button");
-    const username = document.querySelector("#register_username");
-    const email = document.querySelector("#register_email");
-    const password = document.querySelector("#register_password");
-    const proflevel = document.querySelector("#register_proflevel");
-
-    registerButton.addEventListener("click", (event) => {
-      event.preventDefault();
-
-      const body = {
-        password: password.value,
-        email: email.value,
-        professional_level: proflevel.value.toLowerCase(),
-        username: username.value,
-      };
-
-      ApiRequests.registerRequest(body);
-
-      event.preventDefault();
     });
   }
 }

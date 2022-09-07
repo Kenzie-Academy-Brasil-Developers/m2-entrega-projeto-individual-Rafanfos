@@ -1,9 +1,14 @@
+.forbidden {
+  filter: blur(16px);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 header {
   background-color: var(--primary);
 }
 
-.card {
-  background-color: var(--primary-light);
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 #register-field {
@@ -18,11 +23,35 @@ input {
   background-color: var(--primary-light);
 }
 
+.card1 {
+  background-color: var(--primary-light);
+}
+
 .relocation_area {
   background-color: var(--primary-light);
 }
 
 #register-button,
 #login-button {
-  background-color: #ffff;
+  background-color: var(--default);
+}
+
+#actions_list {
+  background: linear-gradient(30deg, #808080, #ffff, #c0c0c0, #ffff, #dcdcdc);
+}
+
+.actions > ul > li {
+  background-color: var(--default);
+}
+
+.card2 {
+  background-color: var(--default);
+}
+
+#return_menu {
+  background-color: var(--primary-dark);
+}
+
+#return_menu:hover {
+  background-color: var(--primary);
 }
