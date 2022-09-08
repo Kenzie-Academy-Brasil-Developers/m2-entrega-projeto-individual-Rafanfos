@@ -235,13 +235,17 @@ class Dashboard {
       setTimeout(() => {
         actions.innerHTML = "";
         presentation.innerText =
-          "Preencha com a informações abaixo e solicite a criação";
+          "Preencha com as informações abaixo e solicite a criação";
 
         const companyForm = document.createElement("form");
         const companyName = document.createElement("input");
-        const opennningHours = document.createElement("select");
+        const opennningHours = document.createElement("div");
+        const opennningHoursTitle = document.createElement("label");
+        const opennningHoursContent = document.createElement("select");
         const companyDescription = document.createElement("input");
-        const companySector = document.createElement("select");
+        const companySector = document.createElement("div");
+        const companySectorTitle = document.createElement("label");
+        const companySectorContent = document.createElement("select");
         const createButton = document.createElement("button");
 
         companyForm.id = "company_form";
@@ -253,6 +257,8 @@ class Dashboard {
         companyForm.classList.add("form");
         createButton.classList.add("button");
 
+        companySectorTitle.innerText = "Setor";
+        opennningHoursTitle.innerText = "Horário de funcionamento";
         createButton.innerText = "Criar";
 
         for (let hour = 1; hour <= 24; hour++) {
@@ -264,7 +270,8 @@ class Dashboard {
             hoursOption.innerText = `${hour}:00`;
           }
 
-          opennningHours.append(hoursOption);
+          opennningHoursContent.append(hoursOption);
+          opennningHours.append(opennningHoursTitle, opennningHoursContent);
         }
 
         sectors.forEach(({ description, uuid }) => {
@@ -272,16 +279,18 @@ class Dashboard {
           sectorsOptions.id = uuid;
           sectorsOptions.innerText = description;
 
-          companySector.append(sectorsOptions);
+          companySectorContent.append(sectorsOptions);
         });
+        const sectorSelected = companySectorContent.value;
 
-        companySector.id = companySector.value.id;
+        companySector.append(companySectorTitle, companySectorContent);
 
         companyForm.append(
           companyName,
           opennningHours,
           companyDescription,
-          companySector
+          companySector,
+          createButton
         );
 
         actions.append(companyForm);

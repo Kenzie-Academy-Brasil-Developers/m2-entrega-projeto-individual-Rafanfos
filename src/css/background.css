@@ -55,3 +55,7 @@ input {
 #return_menu:hover {
   background-color: var(--primary);
 }
+
+.form {
+  background-color: var(--primary);
+}
