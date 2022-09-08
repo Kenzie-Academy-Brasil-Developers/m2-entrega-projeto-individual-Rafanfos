@@ -1,5 +1,3 @@
-import { Login } from "./login.js";
-
 export class ApiRequests {
   static token = localStorage.getItem("@QubitCompany:token") || "";
   static baseUrl = "http://localhost:6280/";
@@ -42,9 +40,13 @@ export class ApiRequests {
       body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
-      .then(async (resp) => {
+      .then((resp) => {
         console.log(resp);
-        debugger;
+
+        if (resp.uuid) {
+          console.log("cheguei");
+          return this.loginRequest(loginBody);
+        }
       })
       .catch((erro) => console.log(erro));
   }

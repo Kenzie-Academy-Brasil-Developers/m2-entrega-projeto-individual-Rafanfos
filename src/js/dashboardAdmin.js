@@ -29,6 +29,7 @@ class Dashboard {
     const actionsList = document.querySelector("#actions_list");
 
     sectorsButton.addEventListener("click", () => {
+      console.log("setores");
       setTimeout(() => {
         actionsList.innerHTML = "";
 
@@ -186,8 +187,110 @@ class Dashboard {
       }, 2000);
     });
   }
+
+  static openCompanies() {
+    const companiesButton = document.querySelector("#companies_button");
+    const actionsList = document.querySelector("#actions_list");
+
+    companiesButton.addEventListener("click", () => {
+      setTimeout(() => {
+        actionsList.innerHTML = "";
+
+        const createCompany = document.createElement("li");
+        const listCompanies = document.createElement("li");
+        const returnMain = document.createElement("li");
+
+        createCompany.classList.add("grey2");
+        createCompany.classList.add("text2");
+        createCompany.classList.add("button");
+        listCompanies.classList.add("grey2");
+        listCompanies.classList.add("text2");
+        listCompanies.classList.add("button");
+        returnMain.classList.add("grey2");
+        returnMain.classList.add("text2");
+        returnMain.classList.add("button");
+
+        createCompany.id = "create_company";
+        listCompanies.id = "list_sectors";
+        returnMain.id = "return_main";
+
+        createCompany.innerText = "Criar Empresa";
+        listCompanies.innerText = "Listar Empresas";
+        returnMain.innerText = "Voltar";
+
+        actionsList.append(createCompany, listCompanies, returnMain);
+        this.createCompanyForm();
+        this.returnMain();
+      }, 2000);
+    });
+  }
+
+  static async createCompanyForm() {
+    const sectors = await ApiRequests.getSectors();
+    const presentation = document.querySelector("#presentation");
+    const actions = document.querySelector(".actions");
+    const createCompany = document.querySelector("#create_company");
+
+    createCompany.addEventListener("click", () => {
+      setTimeout(() => {
+        actions.innerHTML = "";
+        presentation.innerText =
+          "Preencha com a informações abaixo e solicite a criação";
+
+        const companyForm = document.createElement("form");
+        const companyName = document.createElement("input");
+        const opennningHours = document.createElement("select");
+        const companyDescription = document.createElement("input");
+        const companySector = document.createElement("select");
+        const createButton = document.createElement("button");
+
+        companyForm.id = "company_form";
+        companyName.id = "company_name";
+        opennningHours.id = "openning_hours";
+        companyDescription.id = "company_description";
+        createButton.id = "#create_button";
+
+        companyForm.classList.add("form");
+        createButton.classList.add("button");
+
+        createButton.innerText = "Criar";
+
+        for (let hour = 1; hour <= 24; hour++) {
+          const hoursOption = document.createElement("option");
+
+          if (hour < 10) {
+            hoursOption.innerText = `0${hour}:00`;
+          } else {
+            hoursOption.innerText = `${hour}:00`;
+          }
+
+          opennningHours.append(hoursOption);
+        }
+
+        sectors.forEach(({ description, uuid }) => {
+          const sectorsOptions = document.createElement("option");
+          sectorsOptions.id = uuid;
+          sectorsOptions.innerText = description;
+
+          companySector.append(sectorsOptions);
+        });
+
+        companySector.id = companySector.value.id;
+
+        companyForm.append(
+          companyName,
+          opennningHours,
+          companyDescription,
+          companySector
+        );
+
+        actions.append(companyForm);
+      }, 2000);
+    });
+  }
 }
 
 Dashboard.openSectors();
 Dashboard.verification();
 Dashboard.logout();
+Dashboard.openCompanies();
