@@ -255,11 +255,16 @@ class Dashboard {
         createButton.id = "#create_button";
 
         companyForm.classList.add("form");
+        companySector.classList.add("divForm");
+        opennningHours.classList.add("divForm");
         createButton.classList.add("button");
 
         companySectorTitle.innerText = "Setor";
         opennningHoursTitle.innerText = "Horário de funcionamento";
         createButton.innerText = "Criar";
+
+        companyName.placeholder = "Digite o nome da empresa";
+        companyDescription.placeholder = "Digite o slogan da empresa";
 
         for (let hour = 1; hour <= 24; hour++) {
           const hoursOption = document.createElement("option");
@@ -281,7 +286,6 @@ class Dashboard {
 
           companySectorContent.append(sectorsOptions);
         });
-        const sectorSelected = companySectorContent.value;
 
         companySector.append(companySectorTitle, companySectorContent);
 
