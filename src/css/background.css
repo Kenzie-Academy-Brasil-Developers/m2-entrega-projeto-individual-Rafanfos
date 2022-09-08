@@ -41,7 +41,7 @@ input {
 }
 
 .actions > ul > li {
-  background-color: var(--default);
+  background-color: white;
 }
 
 .card2 {
@@ -56,6 +56,10 @@ input {
   background-color: var(--primary);
 }
 
-.form {
+.admin-form {
   background-color: var(--primary);
+}
+
+.admin-form > button {
+  background-color: white;
 }

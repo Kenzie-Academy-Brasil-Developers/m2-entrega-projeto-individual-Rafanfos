@@ -123,9 +123,33 @@ header > div {
   width: 100px;
 }
 
-.form {
+.admin-form {
+  text-align: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 350px;
+  padding: 10px;
+  border-radius: 8px;
+}
+.div-form {
+  display: flex;
+  gap: 20px;
+}
+
+.admin-form > input {
+  padding: 12px;
+  width: 80%;
+  border: none;
+  border-radius: 2px;
+}
+
+.admin-form > button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
 }
 
 @media (min-width: 768px) {

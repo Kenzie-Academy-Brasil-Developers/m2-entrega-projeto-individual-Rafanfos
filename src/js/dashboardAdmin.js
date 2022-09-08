@@ -237,6 +237,7 @@ class Dashboard {
         presentation.innerText =
           "Preencha com as informações abaixo e solicite a criação";
 
+        const companyCreationTitle = document.createElement("h2");
         const companyForm = document.createElement("form");
         const companyName = document.createElement("input");
         const opennningHours = document.createElement("div");
@@ -254,11 +255,18 @@ class Dashboard {
         companyDescription.id = "company_description";
         createButton.id = "#create_button";
 
-        companyForm.classList.add("form");
-        companySector.classList.add("divForm");
-        opennningHours.classList.add("divForm");
-        createButton.classList.add("button");
+        companyForm.classList.add("admin-form");
+        companyCreationTitle.classList.add("title2");
+        companyCreationTitle.classList.add("white");
+        opennningHoursTitle.classList.add("white");
+        companySectorTitle.classList.add("white");
 
+        companySector.classList.add("div-form");
+        opennningHours.classList.add("div-form");
+        createButton.classList.add("button");
+        createButton.classList.add("grey1");
+
+        companyCreationTitle.innerText = "Cadastro de criação de empresa";
         companySectorTitle.innerText = "Setor";
         opennningHoursTitle.innerText = "Horário de funcionamento";
         createButton.innerText = "Criar";
@@ -290,6 +298,7 @@ class Dashboard {
         companySector.append(companySectorTitle, companySectorContent);
 
         companyForm.append(
+          companyCreationTitle,
           companyName,
           opennningHours,
           companyDescription,
