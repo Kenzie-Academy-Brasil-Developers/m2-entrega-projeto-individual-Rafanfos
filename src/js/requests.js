@@ -86,4 +86,19 @@ export class ApiRequests {
 
     return sectors;
   }
+
+  static async createNewCompany(body) {
+    await fetch(`${this.baseUrl}companies`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setTimeout(() => {
+          console.log(resp);
+        });
+      })
+      .catch((erro) => console.log(erro));
+  }
 }

@@ -50,6 +50,7 @@ form {
   width: 100%;
   overflow: hidden;
   animation: appear 2s;
+  scroll-behavior: smooth;
 }
 
 .card1 {
@@ -63,7 +64,6 @@ form {
   box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.75);
   margin: 10px;
   border-radius: 8px;
-  scroll-behavior: smooth;
 }
 
 .transition {

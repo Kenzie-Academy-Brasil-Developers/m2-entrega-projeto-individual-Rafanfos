@@ -251,9 +251,10 @@ class Dashboard {
 
         companyForm.id = "company_form";
         companyName.id = "company_name";
-        opennningHours.id = "openning_hours";
+        opennningHoursContent.id = "openning_hours";
+        companySectorContent.id = "company_sector";
         companyDescription.id = "company_description";
-        createButton.id = "#create_button";
+        createButton.id = "create_company_button";
 
         companyForm.classList.add("admin-form");
         companyCreationTitle.classList.add("title2");
@@ -266,9 +267,9 @@ class Dashboard {
         createButton.classList.add("button");
         createButton.classList.add("grey1");
 
-        companyCreationTitle.innerText = "Cadastro de criação de empresa";
-        companySectorTitle.innerText = "Setor";
-        opennningHoursTitle.innerText = "Horário de funcionamento";
+        companyCreationTitle.innerText = "Cadastro de empresa";
+        companySectorTitle.innerText = "Setor:";
+        opennningHoursTitle.innerText = "Horário de funcionamento:";
         createButton.innerText = "Criar";
 
         companyName.placeholder = "Digite o nome da empresa";
@@ -307,9 +308,42 @@ class Dashboard {
         );
 
         actions.append(companyForm);
+        this.createCompany();
       }, 2000);
     });
   }
+
+  static async createCompany() {
+    const sectors = await ApiRequests.getSectors();
+    const companyName = document.querySelector("#company_name");
+    const companyDescription = document.querySelector("#company_description");
+    const openningHours = document.querySelector("#openning_hours");
+    const companySector = document.querySelector("#company_sector");
+    const createCompanyButton = document.querySelector(
+      "#create_company_button"
+    );
+
+    createCompanyButton.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const sectorselected = companySector.value;
+
+      const uuidSelected = sectors.filter(
+        ({ description }) => description == sectorselected
+      )[0].uuid;
+
+      const body = {
+        name: companyName.value,
+        opening_hours: openningHours.value,
+        description: companyDescription.value,
+        sector_uuid: uuidSelected,
+      };
+
+      await ApiRequests.createNewCompany(body);
+    });
+  }
+
+  
 }
 
 Dashboard.openSectors();
