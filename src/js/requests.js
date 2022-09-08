@@ -1,6 +1,8 @@
+import { Login } from "./login.js";
+
 export class ApiRequests {
   static token = localStorage.getItem("@QubitCompany:token") || "";
-  static baseUrl = "http://localhost:6278/";
+  static baseUrl = "http://localhost:6280/";
   static headers = {
     "Content-type": "application/json",
     Authorization: `Bearer: ${this.token}`,
@@ -28,14 +30,22 @@ export class ApiRequests {
     return sectors;
   }
 
-  static async registerTryRequest(body) {
+  static async registerRequest(body) {
+    const loginBody = {
+      email: body.email,
+      password: body.password,
+    };
+
     const registerResp = await fetch(`${this.baseUrl}auth/register/user`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
-      .then((resp) => console.log(resp))
+      .then(async (resp) => {
+        console.log(resp);
+        debugger;
+      })
       .catch((erro) => console.log(erro));
   }
 
@@ -54,7 +64,7 @@ export class ApiRequests {
           if (resp.is_admin) {
             window.location.replace("./src/pages/dashboardAdmin.html");
           } else {
-            window.location.replace("./src/pages/dashboardAdmin.html");
+            window.location.replace("./src/pages/dashboardUser.html");
           }
         }
       })

@@ -36,7 +36,7 @@ class Register {
         username: username.value,
       };
 
-      await ApiRequests.registerTryRequest(body);
+      await ApiRequests.registerRequest(body);
     });
   }
 }

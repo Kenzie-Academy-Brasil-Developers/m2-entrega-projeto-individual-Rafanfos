@@ -1,6 +1,6 @@
 import { ApiRequests } from "./requests.js";
 
-class Login {
+export class Login {
   static openLogin() {
     const login = document.querySelector("#login");
     const modal = document.querySelector(".login");
@@ -31,8 +31,6 @@ class Login {
         email: email.value,
         password: password.value,
       };
-
-      console.log(body);
 
       await ApiRequests.loginRequest(body);
     });
