@@ -223,7 +223,7 @@ class Dashboard {
         createCompany.id = "create_company";
         listCompanies.id = "list_companies";
         searchCompany.id = "search_company";
-        filterBySector.id = "filterBySector";
+        filterBySector.id = "filter_by_sector";
         returnMain.id = "return_main";
 
         createCompany.innerText = "Criar Empresa";
@@ -242,6 +242,7 @@ class Dashboard {
         this.createCompanyForm();
         this.listCompanies();
         this.searchCompanyForm();
+        this.createFilterBySector();
         this.returnMain();
       }, 3000);
     });
@@ -542,6 +543,11 @@ class Dashboard {
     const companies = await ApiRequests.companiesRequest();
     const companyArea = document.createElement("div");
     companyArea.id = "company_area";
+    const returnButton = document.createElement("button");
+    returnButton.classList.add("button");
+    returnButton.classList.add("white");
+    returnButton.id = "return_menu";
+    returnButton.innerText = "Voltar";
 
     companyNameInput.addEventListener("input", (event) => {
       companyArea.innerHTML = "";
@@ -571,7 +577,84 @@ class Dashboard {
 
       card.append(companyName, companySector, companyDescription);
       companyArea.append(card);
-      searchForm.append(companyArea);
+      searchForm.append(companyArea, returnButton);
+    });
+  }
+
+  static async createFilterBySector() {
+    const companies = await ApiRequests.companiesRequest();
+    const extractSectors = [];
+    companies.forEach(({ sectors }) =>
+      extractSectors.push(sectors.description)
+    );
+    const sectors = Array.from(new Set(extractSectors));
+    console.log(sectors);
+    const actions = document.querySelector(".actions");
+    const filterBySector = document.querySelector("#filter_by_sector");
+
+    filterBySector.addEventListener("click", () => {
+      setTimeout(() => {
+        actions.innerHTML = "";
+        const filterArea = document.createElement("div");
+        const filterTitle = document.createElement("label");
+        const filterSector = document.createElement("select");
+        const emptyOption = document.createElement("option");
+
+        filterSector.append(emptyOption);
+
+        sectors.forEach((sector) => {
+          const filterOption = document.createElement("option");
+          filterOption.innerText = sector;
+          filterSector.append(filterOption);
+        });
+
+        filterSector.id = "filter_sector";
+
+        filterArea.append(filterTitle, filterSector);
+        actions.append(filterArea);
+        this.filterBySector();
+      }, 2000);
+    });
+  }
+
+  static filterBySector() {
+    const companiesArea = document.querySelector(".actions");
+    const filterSector = document.querySelector("#filter_sector");
+    const companiesList = document.createElement("ul");
+    companiesList.id = "companies";
+    companiesArea.append(companiesList);
+
+    filterSector.addEventListener("change", async (event) => {
+      companiesList.innerHTML = "";
+      const selected = event.target.value;
+      const filtered = await ApiRequests.filterBySector(selected);
+      this.createCompanyCards(filtered);
+    });
+  }
+
+  static createCompanyCards(companies) {
+    const companiesList = document.querySelector("#companies");
+
+    companies.forEach(({ description, name, sectors }) => {
+      const card = document.createElement("li");
+      const companyName = document.createElement("h3");
+      const companySector = document.createElement("span");
+      const companyDescription = document.createElement("p");
+
+      card.classList.add("card1");
+      card.classList.add("card_filter");
+      companyName.classList.add("title3");
+      companyName.classList.add("grey1");
+      companySector.classList.add("text3");
+      companyDescription.classList.add("text2");
+      companyDescription.classList.add("grey1");
+
+      companyName.innerText = name;
+      companySector.innerText = sectors.description;
+      companyDescription.innerText = description;
+
+      card.append(companyName, companySector, companyDescription);
+      companiesList.append(card);
     });
   }
 }
