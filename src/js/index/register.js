@@ -1,4 +1,4 @@
-import { ApiRequests } from "./requests.js";
+import { ApiRequests } from "../requests.js";
 
 class Register {
   static openRegister() {
