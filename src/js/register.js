@@ -20,13 +20,14 @@ class Register {
   }
 
   static async createRegister() {
-    const registerButton = document.querySelector("#register-button");
+    // const registerButton = document.querySelector("#register-button");
+    const registerForm = document.querySelector("#register_form");
     const username = document.querySelector("#register_username");
     const email = document.querySelector("#register_email");
     const password = document.querySelector("#register_password");
     const proflevel = document.querySelector("#register_proflevel");
 
-    registerButton.addEventListener("click", async (event) => {
+    registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       const body = {

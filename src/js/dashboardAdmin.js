@@ -200,6 +200,8 @@ class Dashboard {
 
         const createCompany = document.createElement("li");
         const listCompanies = document.createElement("li");
+        const searchCompany = document.createElement("li");
+        const filterBySector = document.createElement("li");
         const returnMain = document.createElement("li");
 
         createCompany.classList.add("grey2");
@@ -208,21 +210,38 @@ class Dashboard {
         listCompanies.classList.add("grey2");
         listCompanies.classList.add("text2");
         listCompanies.classList.add("button");
+        searchCompany.classList.add("grey2");
+        searchCompany.classList.add("text2");
+        searchCompany.classList.add("button");
+        filterBySector.classList.add("grey2");
+        filterBySector.classList.add("text2");
+        filterBySector.classList.add("button");
         returnMain.classList.add("grey2");
         returnMain.classList.add("text2");
         returnMain.classList.add("button");
 
         createCompany.id = "create_company";
         listCompanies.id = "list_companies";
+        searchCompany.id = "search_company";
+        filterBySector.id = "filterBySector";
         returnMain.id = "return_main";
 
         createCompany.innerText = "Criar Empresa";
         listCompanies.innerText = "Listar Empresas";
+        searchCompany.innerText = "Buscar Empresa";
+        filterBySector.innerText = "Filtrar por setor";
         returnMain.innerText = "Voltar";
 
-        actionsList.append(createCompany, listCompanies, returnMain);
+        actionsList.append(
+          createCompany,
+          listCompanies,
+          searchCompany,
+          filterBySector,
+          returnMain
+        );
         this.createCompanyForm();
         this.listCompanies();
+        this.searchCompanyForm();
         this.returnMain();
       }, 3000);
     });
@@ -447,8 +466,6 @@ class Dashboard {
     const presentation = document.querySelector("#presentation");
     const actionsArea = document.querySelector(".actions");
 
-    console.log(returnMenu);
-
     returnMenu.addEventListener("click", () => {
       setTimeout(() => {
         actionsArea.innerHTML = "";
@@ -486,6 +503,73 @@ class Dashboard {
         this.openSectors();
         this.openCompanies();
       }, 2000);
+    });
+  }
+
+  static searchCompanyForm() {
+    const actionArea = document.querySelector(".actions");
+    const presentation = document.querySelector("#presentation");
+    const searchCompany = document.querySelector("#search_company");
+
+    searchCompany.addEventListener("click", () => {
+      setTimeout(() => {
+        presentation.innerText = "Pesquise abaixo a empresa que deseja:";
+
+        actionArea.innerHTML = "";
+
+        const searchForm = document.createElement("form");
+        const input = document.createElement("input");
+
+        searchForm.classList.add("admin-form");
+
+        searchForm.id = "search_form";
+
+        input.id = "company_name";
+
+        input.placeholder = "Digite o nome da empresa";
+
+        searchForm.append(input);
+        actionArea.append(searchForm);
+
+        this.listCompany();
+      }, 2000);
+    });
+  }
+
+  static async listCompany() {
+    const searchForm = document.querySelector("#search_form");
+    const companyNameInput = document.querySelector("#company_name");
+    const companies = await ApiRequests.companiesRequest();
+    const companyArea = document.createElement("div");
+    companyNameInput.addEventListener("input", (event) => {
+      companyArea.innerHTML = "";
+      console.log(companyNameInput.value);
+
+      const listed = companies.filter((element) =>
+        element.name.toLowerCase().includes(event.target.value.toLowerCase())
+      )[0];
+
+      console.log(listed);
+
+      const card = document.createElement("div");
+      const companyName = document.createElement("h3");
+      const companySector = document.createElement("span");
+      const companyDescription = document.createElement("p");
+
+      card.classList.add("card1");
+      companyName.classList.add("title3");
+      companyName.classList.add("grey1");
+      companySector.classList.add("text3");
+      companyDescription.classList.add("text2");
+      companyDescription.classList.add("grey1");
+
+      companyName.innerText = listed.name;
+      companySector.innerText = listed.sectors.description;
+      companyDescription.innerText = listed.description;
+
+      card.append(companyName, companySector, companyDescription);
+      companyArea.append(card);
+      searchForm.append(companyArea);
     });
   }
 }
