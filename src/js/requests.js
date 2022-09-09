@@ -88,17 +88,39 @@ export class ApiRequests {
   }
 
   static async createNewCompany(body) {
-    await fetch(`${this.baseUrl}companies`, {
+    await fetch(`${this.baseUrl}companies/`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        setTimeout(() => {
-          console.log(resp);
-        });
+        console.log(resp);
       })
+      .catch((erro) => console.log(erro));
+  }
+
+  static async listCompanyDepartments(uuid) {
+    const departments = await fetch(`${this.baseUrl}companies/${uuid}`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        return resp;
+      })
+      .catch((erro) => console.log(erro));
+
+    return departments;
+  }
+
+  static async getUsers() {
+    await fetch(`${this.baseUrl}users`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => console.log(resp))
       .catch((erro) => console.log(erro));
   }
 }

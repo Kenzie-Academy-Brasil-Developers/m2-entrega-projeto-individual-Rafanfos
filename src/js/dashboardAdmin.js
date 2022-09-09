@@ -29,7 +29,6 @@ class Dashboard {
     const actionsList = document.querySelector("#actions_list");
 
     sectorsButton.addEventListener("click", () => {
-      console.log("setores");
       setTimeout(() => {
         actionsList.innerHTML = "";
 
@@ -90,6 +89,7 @@ class Dashboard {
         actionsList.append(sectors, companies, departments);
 
         this.openSectors();
+        this.openCompanies();
       }, 2000);
     });
   }
@@ -102,6 +102,7 @@ class Dashboard {
     const actionsList = document.querySelector("#actions_list");
 
     const returnButton = document.createElement("button");
+
     returnButton.classList.add("button");
     returnButton.classList.add("white");
     returnButton.id = "return_menu";
@@ -184,6 +185,7 @@ class Dashboard {
         returnMenu.remove();
 
         this.openSectors();
+        this.openCompanies();
       }, 2000);
     });
   }
@@ -211,7 +213,7 @@ class Dashboard {
         returnMain.classList.add("button");
 
         createCompany.id = "create_company";
-        listCompanies.id = "list_sectors";
+        listCompanies.id = "list_companies";
         returnMain.id = "return_main";
 
         createCompany.innerText = "Criar Empresa";
@@ -220,8 +222,9 @@ class Dashboard {
 
         actionsList.append(createCompany, listCompanies, returnMain);
         this.createCompanyForm();
+        this.listCompanies();
         this.returnMain();
-      }, 2000);
+      }, 3000);
     });
   }
 
@@ -240,9 +243,9 @@ class Dashboard {
         const companyCreationTitle = document.createElement("h2");
         const companyForm = document.createElement("form");
         const companyName = document.createElement("input");
-        const opennningHours = document.createElement("div");
-        const opennningHoursTitle = document.createElement("label");
-        const opennningHoursContent = document.createElement("select");
+        const openingHours = document.createElement("div");
+        const openingHoursTitle = document.createElement("label");
+        const openingHoursContent = document.createElement("select");
         const companyDescription = document.createElement("input");
         const companySector = document.createElement("div");
         const companySectorTitle = document.createElement("label");
@@ -251,7 +254,7 @@ class Dashboard {
 
         companyForm.id = "company_form";
         companyName.id = "company_name";
-        opennningHoursContent.id = "openning_hours";
+        openingHoursContent.id = "opening_hours";
         companySectorContent.id = "company_sector";
         companyDescription.id = "company_description";
         createButton.id = "create_company_button";
@@ -259,17 +262,17 @@ class Dashboard {
         companyForm.classList.add("admin-form");
         companyCreationTitle.classList.add("title2");
         companyCreationTitle.classList.add("white");
-        opennningHoursTitle.classList.add("white");
+        openingHoursTitle.classList.add("white");
         companySectorTitle.classList.add("white");
 
         companySector.classList.add("div-form");
-        opennningHours.classList.add("div-form");
+        openingHours.classList.add("div-form");
         createButton.classList.add("button");
         createButton.classList.add("grey1");
 
         companyCreationTitle.innerText = "Cadastro de empresa";
         companySectorTitle.innerText = "Setor:";
-        opennningHoursTitle.innerText = "Horário de funcionamento:";
+        openingHoursTitle.innerText = "Horário de funcionamento:";
         createButton.innerText = "Criar";
 
         companyName.placeholder = "Digite o nome da empresa";
@@ -284,8 +287,8 @@ class Dashboard {
             hoursOption.innerText = `${hour}:00`;
           }
 
-          opennningHoursContent.append(hoursOption);
-          opennningHours.append(opennningHoursTitle, opennningHoursContent);
+          openingHoursContent.append(hoursOption);
+          openingHours.append(openingHoursTitle, openingHoursContent);
         }
 
         sectors.forEach(({ description, uuid }) => {
@@ -301,13 +304,14 @@ class Dashboard {
         companyForm.append(
           companyCreationTitle,
           companyName,
-          opennningHours,
+          openingHours,
           companyDescription,
           companySector,
           createButton
         );
 
         actions.append(companyForm);
+
         this.createCompany();
       }, 2000);
     });
@@ -317,7 +321,7 @@ class Dashboard {
     const sectors = await ApiRequests.getSectors();
     const companyName = document.querySelector("#company_name");
     const companyDescription = document.querySelector("#company_description");
-    const openningHours = document.querySelector("#openning_hours");
+    const openingHours = document.querySelector("#opening_hours");
     const companySector = document.querySelector("#company_sector");
     const createCompanyButton = document.querySelector(
       "#create_company_button"
@@ -334,7 +338,7 @@ class Dashboard {
 
       const body = {
         name: companyName.value,
-        opening_hours: openningHours.value,
+        opening_hours: openingHours.value,
         description: companyDescription.value,
         sector_uuid: uuidSelected,
       };
@@ -343,7 +347,147 @@ class Dashboard {
     });
   }
 
-  
+  static async listCompanies() {
+    const companies = await ApiRequests.companiesRequest();
+    const presentation = document.querySelector("#presentation");
+    const listCompanies = document.querySelector("#list_companies");
+    const actions = document.querySelector(".actions");
+
+    listCompanies.addEventListener("click", () => {
+      setTimeout(() => {
+        presentation.innerText = "Empresas parceiras";
+
+        actions.innerHTML = "";
+
+        const companiesList = document.createElement("ul");
+        companiesList.classList.add("companies_list");
+        const returnButton = document.createElement("button");
+
+        returnButton.classList.add("button");
+        returnButton.classList.add("white");
+        returnButton.id = "return_menu";
+        returnButton.innerText = "Voltar";
+
+        companies.forEach(async ({ uuid, name, opening_hours, sectors }) => {
+          const card = document.createElement("li");
+          const companyName = document.createElement("h3");
+          const departmentsTitle = document.createElement("h4");
+          const departmentsList = document.createElement("ul");
+          const employersTitle = document.createElement("h4");
+          const employersList = document.createElement("ul");
+          const openingHours = document.createElement("span");
+          const companySector = document.createElement("span");
+
+          card.classList.add("card3");
+          companyName.classList.add("title3");
+          companyName.classList.add("grey1");
+          departmentsTitle.classList.add("grey1");
+          departmentsTitle.classList.add("text1");
+          employersTitle.classList.add("grey1");
+          employersTitle.classList.add("text1");
+          openingHours.classList.add("text2");
+          companySector.classList.add("text2");
+
+          companyName.innerText = name;
+          departmentsTitle.innerText = "Departamentos";
+          employersTitle.innerText = "Empregados";
+          openingHours.innerText = `Horário de funcionamento: ${opening_hours}h`;
+          companySector.innerText = `Setor: ${sectors.description}`;
+
+          const departments = await ApiRequests.listCompanyDepartments(uuid);
+
+          if (departments.length > 0) {
+            departments.forEach(({ name, description }) => {
+              const littleCard = document.createElement("li");
+              const departmentName = document.createElement("span");
+              const departmentDescription = document.createElement("p");
+
+              departmentName.classList.add("text1");
+              departmentName.classList.add("grey1");
+              departmentDescription.classList.add("text2");
+              departmentDescription.classList.add("grey1");
+
+              departmentName.innerText = name;
+              departmentDescription.innerText = description;
+
+              littleCard.append(departmentName, departmentDescription);
+            });
+
+            const users = await ApiRequests.getUsers();
+            const employers = [];
+
+            departments.forEach((uuid) => {
+              const filtered = users.filter(
+                ({ department_uuid }) => department_uuid == uuid
+              );
+
+              filtered.forEach((employer) => {
+                employers.push(employer);
+              });
+            });
+          }
+          card.append(
+            companyName,
+            departmentsTitle,
+            departmentsList,
+            employersTitle,
+            employersList,
+            openingHours,
+            companySector
+          );
+          companiesList.append(card);
+          actions.append(companiesList, returnButton);
+          this.returnToMenu2();
+        });
+      }, 2000);
+    });
+  }
+  static returnToMenu2() {
+    const returnMenu = document.querySelector("#return_menu");
+    const presentation = document.querySelector("#presentation");
+    const actionsArea = document.querySelector(".actions");
+
+    console.log(returnMenu);
+
+    returnMenu.addEventListener("click", () => {
+      setTimeout(() => {
+        actionsArea.innerHTML = "";
+
+        const actionsList = document.createElement("ul");
+        const sectors = document.createElement("li");
+        const companies = document.createElement("li");
+        const departments = document.createElement("li");
+
+        sectors.classList.add("grey2");
+        sectors.classList.add("text2");
+        sectors.classList.add("button");
+        companies.classList.add("grey2");
+        companies.classList.add("text2");
+        companies.classList.add("button");
+        departments.classList.add("grey2");
+        departments.classList.add("text2");
+        departments.classList.add("button");
+
+        actionsList.id = "actions_list";
+        sectors.id = "sectors_button";
+        companies.id = "company_button";
+        departments.id = "departments_button";
+
+        presentation.innerText = "Navegue entre as opções abaixo";
+        sectors.innerText = "Setores";
+        companies.innerText = "Empresas";
+        departments.innerText = "Departamentos";
+
+        actionsList.append(sectors, companies, departments);
+        actionsArea.append(actionsList);
+
+        returnMenu.remove();
+
+        this.openSectors();
+        this.openCompanies();
+      }, 2000);
+    });
+  }
 }
 
 Dashboard.openSectors();
