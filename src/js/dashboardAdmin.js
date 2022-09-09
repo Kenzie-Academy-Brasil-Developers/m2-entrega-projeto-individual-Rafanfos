@@ -541,6 +541,8 @@ class Dashboard {
     const companyNameInput = document.querySelector("#company_name");
     const companies = await ApiRequests.companiesRequest();
     const companyArea = document.createElement("div");
+    companyArea.id = "company_area";
+
     companyNameInput.addEventListener("input", (event) => {
       companyArea.innerHTML = "";
       console.log(companyNameInput.value);

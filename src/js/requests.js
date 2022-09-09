@@ -42,11 +42,11 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         console.log(resp);
-        debugger;
-        // if (resp.uuid) {
-        //   console.log("cheguei");
-        //   return this.loginRequest(loginBody);
-        // }
+
+        if (resp.uuid) {
+          console.log("cheguei");
+          return this.loginRequest(loginBody);
+        }
       })
       .catch((erro) => console.log(erro));
   }
