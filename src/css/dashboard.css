@@ -129,20 +129,28 @@ header > div {
   width: 100px;
 }
 
+.return_menu {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  width: 100px;
+}
+
 .admin-form {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   gap: 20px;
-  height: 380px;
+  height: 350px;
   padding: 10px;
   border-radius: 8px;
-  width: 90%;
+  width: 100%;
 }
+
 .div-form {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
@@ -198,10 +206,6 @@ header > div {
   padding: 10px;
 }
 
-.card1:hover {
-  scale: 1.2;
-}
-
 #companies {
   display: flex;
   flex-direction: column;
@@ -217,6 +221,82 @@ header > div {
   width: 200px;
   display: flex;
   justify-content: space-between;
+}
+
+#departments_list {
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  height: 80%;
+  width: 90%;
+  gap: 50px;
+  padding: 15px;
+  max-width: 300px;
+}
+
+#departments_list > li {
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  min-width: 80%;
+  padding: 20px;
+}
+
+.delete_button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  width: 100px;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete_verification {
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.close {
+  width: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.button_area {
+  display: flex;
+  gap: 20px;
+}
+
+.yes {
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.no {
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (min-width: 768px) {

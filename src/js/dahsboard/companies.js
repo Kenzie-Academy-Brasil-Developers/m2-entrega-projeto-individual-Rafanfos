@@ -1,4 +1,5 @@
 import { ApiRequests } from "../requests.js";
+import { Dashboard } from "./dashboardAdmin.js";
 import { Sectors } from "./sectors.js";
 
 export class Companies {
@@ -64,38 +65,7 @@ export class Companies {
     const returnMain = document.querySelector("#return_main");
     const actionsList = document.querySelector("#actions_list");
 
-    returnMain.addEventListener("click", () => {
-      setTimeout(() => {
-        actionsList.innerHTML = "";
-
-        const sectors = document.createElement("li");
-        const companies = document.createElement("li");
-        const departments = document.createElement("li");
-
-        sectors.classList.add("grey2");
-        sectors.classList.add("text2");
-        sectors.classList.add("button");
-        companies.classList.add("grey2");
-        companies.classList.add("text2");
-        companies.classList.add("button");
-        departments.classList.add("grey2");
-        departments.classList.add("text2");
-        departments.classList.add("button");
-
-        sectors.id = "sectors_button";
-        companies.id = "companies_button";
-        departments.id = "departments_button";
-
-        sectors.innerText = "Setores";
-        companies.innerText = "Empresas";
-        departments.innerText = "Departamentos";
-
-        actionsList.append(sectors, companies, departments);
-
-        Sectors.openSectors();
-        this.openCompanies();
-      }, 2000);
-    });
+    Dashboard.createMenu(returnMain, actionsList);
   }
 
   static async createCompanyForm() {

@@ -60,6 +60,34 @@ input {
   background-color: var(--primary);
 }
 
-.admin-form > button {
+/* .admin-form > button {
   background-color: white;
+} */
+
+.return_menu {
+  background-color: var(--primary-dark);
+}
+
+.return_menu:hover {
+  background-color: var(--primary);
+}
+
+.delete_button {
+  background-color: #8b0000;
+}
+
+.delete_button:hover {
+  background-color: red;
+}
+
+#delete_verification {
+  background-color: var(--primary-dark);
+}
+
+.yes {
+  background-color: green;
+}
+
+.no {
+  background-color: red;
 }

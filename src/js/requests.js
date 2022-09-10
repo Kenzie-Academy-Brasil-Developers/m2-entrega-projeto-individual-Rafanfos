@@ -44,7 +44,6 @@ export class ApiRequests {
         console.log(resp);
 
         if (resp.uuid) {
-          console.log("cheguei");
           return this.loginRequest(loginBody);
         }
       })
@@ -100,8 +99,32 @@ export class ApiRequests {
       .catch((erro) => console.log(erro));
   }
 
-  static async listCompanyDepartments(uuid) {
-    const departments = await fetch(`${this.baseUrl}companies/${uuid}`, {
+  static async getUsers() {
+    await fetch(`${this.baseUrl}users`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => console.log(resp))
+      .catch((erro) => console.log(erro));
+  }
+
+  static async createDepartmentRequest(body) {
+    await fetch(`${this.baseUrl}departments`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+        debugger;
+      })
+      .catch((erro) => console.log(erro));
+  }
+
+  static async companyDepartments(id) {
+    const departments = await fetch(`${this.baseUrl}departments/${id}`, {
       method: "GET",
       headers: this.headers,
     })
@@ -114,13 +137,15 @@ export class ApiRequests {
     return departments;
   }
 
-  static async getUsers() {
-    await fetch(`${this.baseUrl}users`, {
-      method: "GET",
+  static async deleteDepartmentRequest(id) {
+    await fetch(`${this.baseUrl}departments/${id}`, {
+      method: "DELETE",
       headers: this.headers,
     })
       .then((resp) => resp.json())
-      .then((resp) => console.log(resp))
+      .then((resp) => {
+        console.log(resp);
+      })
       .catch((erro) => console.log(erro));
   }
 }
