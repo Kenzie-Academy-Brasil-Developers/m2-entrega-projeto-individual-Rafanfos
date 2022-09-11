@@ -218,4 +218,35 @@ export class ApiRequests {
       })
       .catch((erro) => console.log(erro));
   }
+
+  static async getEmployersDepartment() {
+    const employers = await fetch(
+      `${this.baseUrl}users/departments/coworkers`,
+      {
+        method: "GET",
+        headers: this.headers,
+      }
+    )
+      .then((resp) => resp.json())
+      .then((resp) => {
+        return resp;
+      })
+      .catch((erro) => console.log(erro));
+
+    return employers;
+  }
+
+  static async getUserProfile() {
+    const user = await fetch(`${this.baseUrl}users/profile`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        return resp;
+      })
+      .catch((erro) => console.log(erro));
+
+    return user;
+  }
 }
