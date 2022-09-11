@@ -8,62 +8,10 @@ export class Departments {
     const departmentsButton = document.querySelector("#departments_button");
     const actionsList = document.querySelector("#actions_list");
 
-    this.createDepartmentsMenu(departmentsButton, actionsList);
+    this.departmentsMenu(departmentsButton, actionsList);
   }
 
-  static listDepartments() {
-    const listDepartments = document.querySelector("#list_departments");
-    const actionsList = document.querySelector("#actions_list");
-
-    listDepartments.addEventListener("click", () => {
-      setTimeout(() => {
-        actionsList.innerHTML = "";
-
-        const listAllDepartments = document.createElement("li");
-        const searchDepartment = document.createElement("li");
-        const returnMain = document.createElement("li");
-
-        listAllDepartments.classList.add("grey2");
-        listAllDepartments.classList.add("text2");
-        listAllDepartments.classList.add("button");
-        searchDepartment.classList.add("grey2");
-        searchDepartment.classList.add("text2");
-        searchDepartment.classList.add("button");
-        returnMain.classList.add("grey2");
-        returnMain.classList.add("text2");
-        returnMain.classList.add("button");
-
-        listAllDepartments.id = "list_all_departments";
-        searchDepartment.id = "search_department";
-        returnMain.id = "return_main2";
-
-        listAllDepartments.innerText = "Listar todos";
-        searchDepartment.innerText = "Buscar departamento";
-        returnMain.innerText = "Voltar";
-
-        actionsList.append(listAllDepartments, searchDepartment, returnMain);
-
-        this.allDepartmentsForm();
-        this.returnMain2();
-      }, 2000);
-    });
-  }
-
-  static async returnMain() {
-    const returnMain = document.querySelector("#return_main");
-    const actionsList = document.querySelector("#actions_list");
-
-    Dashboard.createMenu(returnMain, actionsList);
-  }
-
-  static async returnMain2() {
-    const returnMain2 = document.querySelector("#return_main2");
-    const actionsList = document.querySelector("#actions_list");
-
-    this.createDepartmentsMenu(returnMain2, actionsList);
-  }
-
-  static createDepartmentsMenu(button, area) {
+  static departmentsMenu(button, area) {
     button.addEventListener("click", () => {
       setTimeout(() => {
         area.innerHTML = "";
@@ -106,6 +54,59 @@ export class Departments {
     });
   }
 
+  static listDepartments() {
+    const listDepartments = document.querySelector("#list_departments");
+    const actionsList = document.querySelector("#actions_list");
+
+    listDepartments.addEventListener("click", () => {
+      setTimeout(() => {
+        actionsList.innerHTML = "";
+
+        const listAllDepartments = document.createElement("li");
+        const searchDepartment = document.createElement("li");
+        const returnMain = document.createElement("li");
+
+        listAllDepartments.classList.add("grey2");
+        listAllDepartments.classList.add("text2");
+        listAllDepartments.classList.add("button");
+        searchDepartment.classList.add("grey2");
+        searchDepartment.classList.add("text2");
+        searchDepartment.classList.add("button");
+        returnMain.classList.add("grey2");
+        returnMain.classList.add("text2");
+        returnMain.classList.add("button");
+
+        listAllDepartments.id = "list_all_departments";
+        searchDepartment.id = "search_department";
+        returnMain.id = "return_main2";
+
+        listAllDepartments.innerText = "Listar todos";
+        searchDepartment.innerText = "Buscar departamento";
+        returnMain.innerText = "Voltar";
+
+        actionsList.append(listAllDepartments, searchDepartment, returnMain);
+
+        this.allDepartmentsForm();
+        this.searchCompanyDepartment();
+        this.returnMain2();
+      }, 2000);
+    });
+  }
+
+  static async returnMain() {
+    const returnMain = document.querySelector("#return_main");
+    const actionsList = document.querySelector("#actions_list");
+
+    Dashboard.createMenu(returnMain, actionsList);
+  }
+
+  static async returnMain2() {
+    const returnMain2 = document.querySelector("#return_main2");
+    const actionsList = document.querySelector("#actions_list");
+
+    this.departmentsMenu(returnMain2, actionsList);
+  }
+
   static async newDepartments() {
     const companies = await ApiRequests.companiesRequest();
     const createDepartments = document.querySelector("#create_departments");
@@ -131,7 +132,7 @@ export class Departments {
 
         filterCompany.append(emptyOption);
 
-        companies.forEach(({ name }) => {
+        companies.forEach(({ name }, i) => {
           const companyOption = document.createElement("option");
           companyOption.innerText = name;
           companyOption.classList.add("text3");
@@ -365,6 +366,138 @@ export class Departments {
     });
   }
 
+  static async searchCompanyDepartment() {
+    const searchDepartment = document.querySelector("#search_department");
+    const presentation = document.querySelector("#presentation");
+    const actions = document.querySelector(".actions");
+    const companies = await ApiRequests.companiesRequest();
+
+    searchDepartment.addEventListener("click", () => {
+      setTimeout(async () => {
+        presentation.innerText =
+          "Selecione a empresa e departamento, para listar seus funcionários";
+        actions.innerHTML = "";
+
+        const searchDepartmentForm = document.createElement("form");
+        const filterCompanyArea = document.createElement("div");
+        const filterCompanyTitle = document.createElement("label");
+        const filterCompany = document.createElement("select");
+        const filterDepartmentArea = document.createElement("div");
+        const filterDepartmentTitle = document.createElement("label");
+        const filterDepartment = document.createElement("select");
+        const emptyOption = document.createElement("option");
+        const employersList = document.createElement("ul");
+        const returnButton = document.createElement("button");
+
+        searchDepartmentForm.classList.add("admin-form");
+        employersList.classList.add("wait_list");
+        filterCompanyTitle.classList.add("white");
+        filterCompany.classList.add("filter_company");
+        filterDepartmentTitle.classList.add("white");
+        filterDepartment.classList.add("filter_department");
+        returnButton.classList.add("button");
+        returnButton.classList.add("white");
+        returnButton.classList.add("return_menu");
+
+        returnButton.id = "return_main";
+
+        returnButton.innerText = "Voltar";
+
+        filterCompany.append(emptyOption);
+
+        companies.forEach(({ name }) => {
+          const companyOption = document.createElement("option");
+          companyOption.innerText = name;
+          filterCompany.append(companyOption);
+        });
+
+        filterCompany.addEventListener("change", async () => {
+          filterDepartment.innerHTML = "";
+          employersList.innerHTML = "";
+          filterDepartment.append(emptyOption);
+          const companyselelected = filterCompany.value;
+          const companyId = companies.filter(
+            (company) => companyselelected == company.name
+          )[0].uuid;
+          filterCompany.id = companyId;
+
+          const selectedCompany = document.querySelector(".filter_company");
+
+          const companyUuidd = selectedCompany.id;
+
+          const departments = await ApiRequests.companyDepartments(
+            companyUuidd
+          );
+
+          departments.forEach(({ name }) => {
+            const departmentsOption = document.createElement("option");
+
+            departmentsOption.innerText = name;
+            filterDepartment.append(departmentsOption);
+          });
+        });
+
+        filterDepartment.addEventListener("change", async () => {
+          const companyUuid = companies.filter(
+            ({ name }) => name == filterCompany.value
+          )[0].uuid;
+
+          const departments = await ApiRequests.companyDepartments(companyUuid);
+
+          const selectedDepartmentUuid = departments.filter(
+            ({ name }) => name == filterDepartment.value
+          )[0].uuid;
+
+          const users = await ApiRequests.getUsers();
+          const employers = [];
+
+          users.filter((user) => {
+            if (user.department_uuid == selectedDepartmentUuid) {
+              employers.push(user);
+            }
+          });
+
+          employers.forEach(
+            ({ username, kind_of_work, professional_level, uuid }) => {
+              const user = document.createElement("li");
+              const userName = document.createElement("h3");
+              const kindOfWork = document.createElement("span");
+              const profLevel = document.createElement("span");
+
+              user.classList.add("card4");
+              userName.classList.add("white");
+              userName.classList.add("title3");
+              kindOfWork.classList.add("white");
+              kindOfWork.classList.add("text2");
+              profLevel.classList.add("white");
+              profLevel.classList.add("text2");
+
+              user.id = uuid;
+
+              userName.innerText = username;
+              kindOfWork.innerText = `Regime: ${kind_of_work}`;
+              profLevel.innerText = `Nível profissional: ${professional_level}`;
+
+              user.append(userName, kindOfWork, profLevel);
+              employersList.append(user);
+            }
+          );
+        });
+        filterCompanyArea.append(filterCompanyTitle, filterCompany);
+        filterDepartmentArea.append(filterDepartmentTitle, filterDepartment);
+        searchDepartmentForm.append(
+          filterCompanyArea,
+          filterDepartmentArea,
+          employersList,
+          returnButton
+        );
+        actions.append(searchDepartmentForm);
+        this.returnMain();
+        this.newHire();
+      }, 2000);
+    });
+  }
+
   static employersActions() {
     const employers = document.querySelector("#employers");
     const actionsList = document.querySelector("#actions_list");
@@ -410,6 +543,7 @@ export class Departments {
         area.append(hire, fire, modifications, returnMain);
 
         this.hireEmployersMenu();
+        this.fireEmployersMenu();
         this.returnMain3();
       }, 2000);
     });
@@ -431,7 +565,7 @@ export class Departments {
     hire.addEventListener("click", () => {
       setTimeout(async () => {
         presentation.innerText =
-          "Filtre empresa e departamento, depois selecione o funcionário que deseja contratar.";
+          "Selecione empresa e departamento, depois o funcionário que deseja contratar.";
         actions.innerHTML = "";
 
         const hireForm = document.createElement("form");
@@ -442,10 +576,13 @@ export class Departments {
         const filterDepartmentTitle = document.createElement("label");
         const filterDepartment = document.createElement("select");
         const emptyOption = document.createElement("option");
+        const waitListTitle = document.createElement("h3");
         const waitList = document.createElement("ul");
         const returnButton = document.createElement("button");
 
         hireForm.classList.add("admin-form");
+        waitListTitle.classList.add("white");
+        waitListTitle.classList.add("title3");
         waitList.classList.add("wait_list");
         filterCompanyTitle.classList.add("white");
         filterCompany.classList.add("filter_company");
@@ -457,14 +594,48 @@ export class Departments {
 
         returnButton.id = "return_main";
 
+        waitListTitle.innerText = "Lista de espera";
         returnButton.innerText = "Voltar";
 
+        const waitListUsers = await ApiRequests.getWaitList();
+
+        waitListUsers.forEach(
+          ({ username, kind_of_work, professional_level, uuid }) => {
+            const user = document.createElement("li");
+            const userName = document.createElement("h3");
+            const kindOfWork = document.createElement("span");
+            const profLevel = document.createElement("span");
+            const hireButton = document.createElement("button");
+
+            user.classList.add("card4");
+            userName.classList.add("white");
+            userName.classList.add("title3");
+            kindOfWork.classList.add("white");
+            kindOfWork.classList.add("text2");
+            profLevel.classList.add("white");
+            profLevel.classList.add("text2");
+            hireButton.classList.add("button");
+            hireButton.classList.add("white");
+            hireButton.classList.add("hire_button");
+
+            user.id = uuid;
+
+            userName.innerText = username;
+            kindOfWork.innerText = `Regime: ${kind_of_work}`;
+            profLevel.innerText = `Nível profissional: ${professional_level}`;
+            hireButton.innerText = "Contratar";
+
+            user.append(userName, kindOfWork, profLevel, hireButton);
+            waitList.append(user);
+          }
+        );
         filterCompany.append(emptyOption);
         filterCompanyArea.append(filterCompanyTitle, filterCompany);
         filterDepartmentArea.append(filterDepartmentTitle, filterDepartment);
         hireForm.append(
           filterCompanyArea,
           filterDepartmentArea,
+          waitListTitle,
           waitList,
           returnButton
         );
@@ -479,7 +650,6 @@ export class Departments {
 
         filterCompany.addEventListener("change", async () => {
           filterDepartment.innerHTML = "";
-          waitList.innerHTML = "";
           filterDepartment.append(emptyOption);
           const companyselelected = filterCompany.value;
           const companyId = companies.filter(
@@ -501,40 +671,8 @@ export class Departments {
             departmentsOption.innerText = name;
             filterDepartment.append(departmentsOption);
           });
-
-          const waitListUsers = await ApiRequests.getWaitList();
-
-          waitListUsers.forEach(
-            ({ username, kind_of_work, professional_level, uuid }) => {
-              const user = document.createElement("li");
-              const userName = document.createElement("h3");
-              const kindOfWork = document.createElement("span");
-              const profLevel = document.createElement("span");
-              const hireButton = document.createElement("button");
-
-              user.classList.add("card4");
-              userName.classList.add("white");
-              userName.classList.add("title3");
-              kindOfWork.classList.add("white");
-              kindOfWork.classList.add("text2");
-              profLevel.classList.add("white");
-              profLevel.classList.add("text2");
-              hireButton.classList.add("button");
-              hireButton.classList.add("white");
-              hireButton.classList.add("hire_button");
-
-              user.id = uuid;
-
-              userName.innerText = username;
-              kindOfWork.innerText = `Regime: ${kind_of_work}`;
-              profLevel.innerText = `Nível profissional: ${professional_level}`;
-              hireButton.innerText = "Contratar";
-
-              user.append(userName, kindOfWork, profLevel, hireButton);
-              waitList.append(user);
-            }
-          );
         });
+
         this.returnMain();
         this.newHire();
       }, 2000);
@@ -593,6 +731,253 @@ export class Departments {
 
     close.addEventListener("click", () => {
       modal.classList.toggle("hidden");
+    });
+  }
+
+  static async newHire() {
+    const departments = await ApiRequests.allDepartments();
+    const waitList = document.querySelector(".wait_list");
+    const modal = document.querySelector(".hire_verification");
+    const department = document.querySelector(".filter_department");
+
+    waitList.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const selectedDepartment = department.value;
+      const clicked = event.target;
+
+      if (clicked.tagName == "BUTTON" || clicked.innerText == "Contratar") {
+        const departmentUuidd = departments.filter(
+          ({ name }) => name == selectedDepartment
+        )[0].uuid;
+
+        const userUuid = clicked.closest("li").id;
+
+        const body = {
+          department_uuid: departmentUuidd,
+          user_uuid: userUuid,
+        };
+
+        console.log(body);
+        modal.classList.toggle("hidden");
+        this.openHireModal(body);
+        this.closeModalHire();
+      }
+    });
+  }
+
+  static openHireModal(body) {
+    const modal = document.querySelector(".hire_verification");
+
+    const yes = document.querySelector("#yes_hire");
+    const no = document.querySelector("#no_hire");
+
+    yes.addEventListener("click", async () => {
+      await ApiRequests.hireRequest(body);
+    });
+
+    no.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeModalHire() {
+    const close = document.querySelector("#close-hire");
+    const modal = document.querySelector(".hire_verification");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static async fireEmployersMenu() {
+    const fireButton = document.querySelector("#fire_button");
+    const presentation = document.querySelector("#presentation");
+    const actions = document.querySelector(".actions");
+    const companies = await ApiRequests.companiesRequest();
+
+    fireButton.addEventListener("click", () => {
+      setTimeout(async () => {
+        presentation.innerText =
+          "Selecione a empresa e departamento, para listar seus funcionários";
+        actions.innerHTML = "";
+
+        const searchDepartmentForm = document.createElement("form");
+        const filterCompanyArea = document.createElement("div");
+        const filterCompanyTitle = document.createElement("label");
+        const filterCompany = document.createElement("select");
+        const filterDepartmentArea = document.createElement("div");
+        const filterDepartmentTitle = document.createElement("label");
+        const filterDepartment = document.createElement("select");
+        const emptyOption = document.createElement("option");
+        const employersList = document.createElement("ul");
+        const returnButton = document.createElement("button");
+
+        searchDepartmentForm.classList.add("admin-form");
+        employersList.classList.add("employers_list");
+        filterCompanyTitle.classList.add("white");
+        filterCompany.classList.add("filter_company");
+        filterDepartmentTitle.classList.add("white");
+        filterDepartment.classList.add("filter_department");
+        returnButton.classList.add("button");
+        returnButton.classList.add("white");
+        returnButton.classList.add("return_menu");
+
+        returnButton.id = "return_main";
+
+        returnButton.innerText = "Voltar";
+
+        filterCompany.append(emptyOption);
+
+        companies.forEach(({ name }) => {
+          const companyOption = document.createElement("option");
+          companyOption.innerText = name;
+          filterCompany.append(companyOption);
+        });
+
+        filterCompany.addEventListener("change", async () => {
+          filterDepartment.innerHTML = "";
+          employersList.innerHTML = "";
+          filterDepartment.append(emptyOption);
+          const companyselelected = filterCompany.value;
+          const companyId = companies.filter(
+            (company) => companyselelected == company.name
+          )[0].uuid;
+          filterCompany.id = companyId;
+
+          const selectedCompany = document.querySelector(".filter_company");
+
+          const companyUuidd = selectedCompany.id;
+
+          const departments = await ApiRequests.companyDepartments(
+            companyUuidd
+          );
+
+          departments.forEach(({ name }) => {
+            const departmentsOption = document.createElement("option");
+
+            departmentsOption.innerText = name;
+            filterDepartment.append(departmentsOption);
+          });
+        });
+
+        filterDepartment.addEventListener("change", async () => {
+          const companyUuid = companies.filter(
+            ({ name }) => name == filterCompany.value
+          )[0].uuid;
+
+          const departments = await ApiRequests.companyDepartments(companyUuid);
+
+          const selectedDepartmentUuid = departments.filter(
+            ({ name }) => name == filterDepartment.value
+          )[0].uuid;
+
+          const users = await ApiRequests.getUsers();
+          const employers = [];
+
+          users.filter((user) => {
+            if (user.department_uuid == selectedDepartmentUuid) {
+              employers.push(user);
+            }
+          });
+
+          employers.forEach(
+            ({ username, kind_of_work, professional_level, uuid }) => {
+              const user = document.createElement("li");
+              const userName = document.createElement("h3");
+              const kindOfWork = document.createElement("span");
+              const profLevel = document.createElement("span");
+              const fireButton = document.createElement("button");
+
+              user.classList.add("card4");
+              userName.classList.add("white");
+              userName.classList.add("title3");
+              kindOfWork.classList.add("white");
+              kindOfWork.classList.add("text2");
+              profLevel.classList.add("white");
+              profLevel.classList.add("text2");
+              fireButton.classList.add("button");
+              fireButton.classList.add("white");
+              fireButton.classList.add("fire_button");
+
+              user.id = uuid;
+
+              userName.innerText = username;
+              kindOfWork.innerText = `Regime: ${kind_of_work}`;
+              profLevel.innerText = `Nível profissional: ${professional_level}`;
+              fireButton.innerText = "Demitir";
+
+              user.append(userName, kindOfWork, profLevel, fireButton);
+              employersList.append(user);
+            }
+          );
+        });
+        filterCompanyArea.append(filterCompanyTitle, filterCompany);
+        filterDepartmentArea.append(filterDepartmentTitle, filterDepartment);
+        searchDepartmentForm.append(
+          filterCompanyArea,
+          filterDepartmentArea,
+          employersList,
+          returnButton
+        );
+        actions.append(searchDepartmentForm);
+        this.returnMain();
+        this.newFire();
+      }, 2000);
+    });
+  }
+  static async newFire() {
+    const departments = await ApiRequests.allDepartments();
+    const employersList = document.querySelector(".employers_list");
+    const modal = document.querySelector(".fire_verification");
+    const department = document.querySelector(".filter_department");
+
+    employersList.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const clicked = event.target;
+
+      if (clicked.tagName == "BUTTON" || clicked.innerText == "Contratar") {
+        const userUuid = clicked.closest("li").id;
+        modal.classList.toggle("hidden");
+
+        this.openHireModal(userUuid);
+        this.closeModalFire();
+      }
+    });
+  }
+
+  static openFireModal(id) {
+    const modal = document.querySelector(".fire_verification");
+
+    const yes = document.querySelector("#yes_fire");
+    const no = document.querySelector("#no_fire");
+
+    yes.addEventListener("click", async () => {
+      await ApiRequests.fireRequest(id);
+    });
+
+    no.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeModalFire() {
+    const close = document.querySelector("#close-fire");
+    const modal = document.querySelector(".fire_verification");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static modificationsEmployersMenu() {
+    const modifications = document.querySelector("#modifications");
+    const actions = document.querySelector(".actions");
+    const presentation = document.querySelector("#presentation");
+
+    modifications.addEventListener("click", () => {
+      presentation.innerText = "Selecione o funcionário que deseja modificar";
+      actions.innerHTML = "";
     });
   }
 }

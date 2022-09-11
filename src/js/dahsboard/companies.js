@@ -230,6 +230,7 @@ export class Companies {
           companyName.classList.add("grey1");
           departmentsTitle.classList.add("grey1");
           departmentsTitle.classList.add("text1");
+          departmentsList.classList.add("departments_list");
           employersTitle.classList.add("grey1");
           employersTitle.classList.add("text1");
           openingHours.classList.add("text2");
@@ -241,38 +242,7 @@ export class Companies {
           openingHours.innerText = `Horário de funcionamento: ${opening_hours}h`;
           companySector.innerText = `Setor: ${sectors.description}`;
 
-          const departments = await ApiRequests.listCompanyDepartments(uuid);
-
-          if (departments.length > 0) {
-            departments.forEach(({ name, description }) => {
-              const littleCard = document.createElement("li");
-              const departmentName = document.createElement("span");
-              const departmentDescription = document.createElement("p");
-
-              departmentName.classList.add("text1");
-              departmentName.classList.add("grey1");
-              departmentDescription.classList.add("text2");
-              departmentDescription.classList.add("grey1");
-
-              departmentName.innerText = name;
-              departmentDescription.innerText = description;
-
-              littleCard.append(departmentName, departmentDescription);
-            });
-
-            const users = await ApiRequests.getUsers();
-            const employers = [];
-
-            departments.forEach((uuid) => {
-              const filtered = users.filter(
-                ({ department_uuid }) => department_uuid == uuid
-              );
-
-              filtered.forEach((employer) => {
-                employers.push(employer);
-              });
-            });
-          }
+          companiesList.append(card);
           card.append(
             companyName,
             departmentsTitle,
@@ -282,9 +252,83 @@ export class Companies {
             openingHours,
             companySector
           );
-          companiesList.append(card);
-          actions.append(companiesList, returnButton);
-          this.returnToMenu2();
+          const departments = await ApiRequests.companyDepartments(uuid);
+
+          if (departments.length > 0) {
+            departments.forEach(({ name, description }) => {
+              const littleCard = document.createElement("li");
+              const departmentName = document.createElement("span");
+              const departmentDescription = document.createElement("p");
+
+              littleCard.classList.add("card4");
+              departmentName.classList.add("text1");
+              departmentName.classList.add("white");
+              departmentDescription.classList.add("text2");
+              departmentDescription.classList.add("white");
+
+              departmentName.innerText = name;
+              departmentDescription.innerText = description;
+
+              littleCard.append(departmentName, departmentDescription);
+              departmentsList.append(littleCard);
+            });
+
+            const users = await ApiRequests.getUsers();
+            const employers = [];
+
+            departments.forEach(({ uuid }) => {
+              users.forEach((user) => {
+                if (user.department_uuid == uuid) {
+                  employers.push(user);
+                }
+              });
+            });
+
+            employers.forEach(
+              ({
+                username,
+                kind_of_work,
+                professional_level,
+                department_uuid,
+              }) => {
+                const departmentName = departments.filter(
+                  ({ uuid }) => uuid == department_uuid
+                )[0].name;
+
+                const littleCard2 = document.createElement("li");
+                const employerName = document.createElement("span");
+                const workDepartment = document.createElement("span");
+                const kindWork = document.createElement("span");
+                const profLevel = document.createElement("span");
+
+                littleCard2.classList.add("card4");
+                employerName.classList.add("text1");
+                employerName.classList.add("white");
+                workDepartment.classList.add("text2");
+                workDepartment.classList.add("white");
+                kindWork.classList.add("text2");
+                kindWork.classList.add("white");
+                profLevel.classList.add("text2");
+                profLevel.classList.add("white");
+
+                employerName.innerText = username;
+                workDepartment.innerText = `Departamento: ${departmentName}`;
+                kindWork.innerText = `Regime: ${kind_of_work}`;
+                profLevel.innerText = `Nível: ${professional_level} `;
+
+                littleCard2.append(
+                  employerName,
+                  profLevel,
+                  workDepartment,
+                  kindWork
+                );
+                employersList.append(littleCard2);
+              }
+            );
+
+            actions.append(companiesList, returnButton);
+            this.returnToMenu2();
+          }
         });
       }, 2000);
     });
@@ -376,11 +420,6 @@ export class Companies {
     const companies = await ApiRequests.companiesRequest();
     const companyArea = document.createElement("div");
     companyArea.id = "company_area";
-    const returnButton = document.createElement("button");
-    returnButton.classList.add("button");
-    returnButton.classList.add("white");
-    returnButton.id = "return_menu";
-    returnButton.innerText = "Voltar";
 
     companyNameInput.addEventListener("input", (event) => {
       companyArea.innerHTML = "";
@@ -407,7 +446,7 @@ export class Companies {
 
       card.append(companyName, companySector, companyDescription);
       companyArea.append(card);
-      searchForm.append(companyArea, returnButton);
+      searchForm.append(companyArea);
     });
   }
 

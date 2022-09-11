@@ -100,13 +100,17 @@ export class ApiRequests {
   }
 
   static async getUsers() {
-    await fetch(`${this.baseUrl}users`, {
+    const users = await fetch(`${this.baseUrl}users`, {
       method: "GET",
       headers: this.headers,
     })
       .then((resp) => resp.json())
-      .then((resp) => console.log(resp))
+      .then((resp) => {
+        return resp;
+      })
       .catch((erro) => console.log(erro));
+
+    return users;
   }
 
   static async createDepartmentRequest(body) {
@@ -118,7 +122,6 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         console.log(resp);
-        debugger;
       })
       .catch((erro) => console.log(erro));
   }
@@ -179,6 +182,19 @@ export class ApiRequests {
 
   static async hireRequest(body) {
     await fetch(`${this.baseUrl}departments/hire/`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => console.log(erro));
+  }
+
+  static async fireRequest(id) {
+    await fetch(`${this.baseUrl}departments/dismiss/${id}`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify(body),
