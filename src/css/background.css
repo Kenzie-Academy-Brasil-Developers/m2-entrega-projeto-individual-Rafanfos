@@ -1,0 +1,109 @@
+.forbidden {
+  filter: blur(16px);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+header {
+  background-color: var(--primary);
+}
+
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#register-field {
+  background-color: var(--primary);
+}
+
+#login-field {
+  background-color: var(--primary);
+}
+
+input {
+  background-color: var(--primary-light);
+}
+
+.card1 {
+  background-color: var(--primary-light);
+}
+
+.relocation_area {
+  background-color: var(--primary-light);
+}
+
+#register-button,
+#login-button {
+  background-color: var(--default);
+}
+
+#actions_list {
+  background: linear-gradient(30deg, #808080, #ffff, #c0c0c0, #ffff, #dcdcdc);
+}
+
+.actions > ul > li {
+  background-color: white;
+}
+
+.card2 {
+  background-color: var(--default);
+}
+
+#return_menu {
+  background-color: var(--primary-dark);
+}
+
+#return_menu:hover {
+  background-color: var(--primary);
+}
+
+.admin-form {
+  background-color: var(--primary);
+}
+
+/* .admin-form > button {
+  background-color: white;
+} */
+
+.return_menu {
+  background-color: var(--primary-dark);
+}
+
+.return_menu:hover {
+  background-color: var(--primary);
+}
+
+.delete_button {
+  background-color: #8b0000;
+}
+
+.delete_button:hover {
+  background-color: red;
+}
+
+.verification {
+  background-color: var(--primary-dark);
+}
+
+.yes {
+  background-color: green;
+}
+
+.no {
+  background-color: red;
+}
+
+.card4 {
+  background-color: var(--primary-dark);
+}
+
+.hire_button {
+  background-color: green;
+}
+
+.fire_button {
+  background-color: red;
+}
+
+.modify_button {
+  background-color: orange;
+}

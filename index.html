@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./src/css/global.css" />
+    <link rel="stylesheet" href="./src/css/background.css" />
+    <link rel="stylesheet" href="./src/css/fonts.css" />
+    <link rel="stylesheet" href="./src/css/colors.css" />
+    <link rel="stylesheet" href="./src/css/index.css" />
+
+    <script type="module" defer src="./src/js/index/index.js"></script>
+    <script type="module" defer src="./src/js/index/login.js"></script>
+    <script type="module" defer src="./src/js/index/register.js"></script>
+
+    <link rel="icon" href="./src/assets/favicon.jpg" />
+
+    <title>QubitCompany - 0, 1, ou mais soluções para sua empresa</title>
+  </head>
+  <body>
+    <header class="white">
+      <div>
+        <h2 class="title2">QubitCompany</h2>
+      </div>
+      <nav>
+        <div id="login-register">
+          <span id="login" class="white text2 button">Login</span>
+          <span id="register" class="white text2 button">Cadastro</span>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <h2 class="title2">Empresas participantes</h2>
+      <form>
+        <label class="text1" for="sector_filter">Filtrar por setor</label>
+        <select id="sector_filter">
+          <option></option>
+        </select>
+      </form>
+      <section id="companies_section"></section>
+      <section class="modal-wrapper register hidden">
+        <div id="register-field">
+          <img
+            id="close-register"
+            class="close button"
+            src="./src/assets/close.png"
+          />
+          <h2 class="title1 white">Cadastro</h2>
+          <form id="register_form">
+            <input
+              id="register_username"
+              type="text"
+              placeholder="Digite o nome de usuário"
+            />
+            <input
+              id="register_email"
+              class="grey1"
+              type="text"
+              placeholder="Digite o e-mail"
+            />
+            <input
+              id="register_password"
+              class="grey1"
+              type="password"
+              placeholder="Digite a senha"
+            />
+            <div id="proflevel">
+              <label class="white">Nível profissional</label>
+              <select id="register_proflevel" class="grey1 text2" type="text">
+                <option class="grey1 text3">Estágio</option>
+                <option class="grey1 text3">Júnior</option>
+                <option class="grey1 text3">Pleno</option>
+                <option class="grey1 text3">Sênior</option>
+                <option class="grey1 text3">Master</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              id="register-button"
+              class="button grey1 text1"
+            >
+              Cadastrar
+            </button>
+          </form>
+          <span class="white">Já tem conta?</span>
+          <div class="relocation_area button">
+            <span id="relocation_login" class="grey1"
+              >Ir para a página de login</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="modal-wrapper login hidden">
+        <div id="login-field">
+          <img
+            id="close-login"
+            class="close button"
+            src="./src/assets/close.png"
+          />
+          <h2 class="title1 white">Login</h2>
+          <form>
+            <input
+              id="login_email"
+              class="grey1"
+              type="text"
+              placeholder="Digite o e-mail"
+            />
+            <input
+              id="login_password"
+              class="grey1"
+              type="password"
+              placeholder="Digite a senha"
+            />
+            <button type="button" id="login-button" class="button grey1 text1">
+              Entrar
+            </button>
+          </form>
+          <span class="white">Não é cadastrado ainda?</span>
+          <div class="relocation_area button">
+            <span id="relocation_register" class="grey1"
+              >Ir para a página de cadastro</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

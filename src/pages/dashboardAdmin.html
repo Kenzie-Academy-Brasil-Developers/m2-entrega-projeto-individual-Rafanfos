@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/background.css" />
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/colors.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+
+    <script
+      type="module"
+      defer
+      src="../js/dahsboard/dashboardAdmin.js"
+    ></script>
+    <script type="module" defer src="../js/dahsboard/sectors.js"></script>
+    <script type="module" defer src="../js/dahsboard/companies.js"></script>
+    <script type="module" defer src="../js/dahsboard/sectors.js"></script>
+    <script type="module" defer src="../js/dahsboard/departments.js"></script>
+
+    <link rel="icon" href="../assets/favicon.jpg" />
+
+    <title>QubitCompany - Dashboard Admin</title>
+  </head>
+  <body>
+    <header class="white">
+      <div>
+        <h2 class="title2">QubitCompany</h2>
+        <span id="logout" class="text2 button">Logout</span>
+      </div>
+    </header>
+    <main class="container">
+      <section id="greetings_area">
+        <h1 class="primary3 title1">Bem vindo Admin!</h1>
+        <p id="presentation" class="primary3 title2">
+          Navegue entre as opções abaixo
+        </p>
+      </section>
+      <section class="actions">
+        <ul id="actions_list">
+          <li id="sectors_button" class="grey2 text2 button">Setores</li>
+          <li id="companies_button" class="grey2 text2 button">Empresas</li>
+          <li id="departments_button" class="grey2 text2 button">
+            Departamentos
+          </li>
+        </ul>
+      </section>
+      <section class="modal-wrapper delete_verification hidden">
+        <div id="delete_verification" class="verification">
+          <img
+            id="close-delete"
+            class="close button"
+            src="../assets/close.png"
+          />
+          <p class="white">Deseja apagar esse departamento da empresa?</p>
+          <div class="button_area">
+            <button class="button yes white" id="yes_delete">Sim</button>
+            <button class="button no white" id="no_delete">Não</button>
+          </div>
+        </div>
+      </section>
+      <section class="modal-wrapper hire_verification hidden">
+        <div id="hire_verification" class="verification">
+          <img id="close-hire" class="close button" src="../assets/close.png" />
+          <p class="white">Deseja contratar esse funcionário?</p>
+          <div class="button_area">
+            <button class="button yes white" id="yes_hire">Sim</button>
+            <button class="button no white" id="no_hire">Não</button>
+          </div>
+        </div>
+      </section>
+      <section class="modal-wrapper fire_verification hidden">
+        <div id="fire_verification" class="verification">
+          <img id="close-fire" class="close button" src="../assets/close.png" />
+          <p class="white">Deseja demitir esse funcionário?</p>
+          <div class="button_area">
+            <button class="button yes white" id="yes_fire">Sim</button>
+            <button class="button no white" id="no_fire">Não</button>
+          </div>
+        </div>
+      </section>
+      <section class="modal-wrapper modify_verification hidden">
+        <div id="modify_verification" class="verification">
+          <img
+            id="close-modify"
+            class="close button"
+            src="../assets/close.png"
+          />
+          <p class="white">Deseja atualizar os dados?</p>
+          <div class="button_area">
+            <button class="button yes white" id="yes_modify">Sim</button>
+            <button class="button no white" id="no_modify">Não</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
