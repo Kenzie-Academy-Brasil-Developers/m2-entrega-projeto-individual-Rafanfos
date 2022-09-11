@@ -11,4 +11,13 @@ class DashboardUser {
       body.classList.toggle("forbidden");
     }
   }
+  static logout() {
+    const logout = document.querySelector("#logout");
+
+    logout.addEventListener("click", () => {
+      localStorage.clear();
+
+      window.location.replace("../../index.html");
+    });
+  }
 }
