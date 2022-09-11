@@ -11,5 +11,13 @@
 }
 
 .white {
-  color: #ffff;
+  color: white;
+}
+
+.primary1 {
+  color: var(--primary);
+}
+
+.primary3 {
+  color: var(--primary-dark);
 }

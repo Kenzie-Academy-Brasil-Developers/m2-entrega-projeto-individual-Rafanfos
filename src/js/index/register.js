@@ -1,4 +1,4 @@
-import { ApiRequests } from "./requests.js";
+import { ApiRequests } from "../requests.js";
 
 class Register {
   static openRegister() {
@@ -19,14 +19,15 @@ class Register {
     });
   }
 
-  static createRegister() {
-    const registerButton = document.querySelector("#register-button");
+  static async createRegister() {
+    // const registerButton = document.querySelector("#register-button");
+    const registerForm = document.querySelector("#register_form");
     const username = document.querySelector("#register_username");
     const email = document.querySelector("#register_email");
     const password = document.querySelector("#register_password");
     const proflevel = document.querySelector("#register_proflevel");
 
-    registerButton.addEventListener("click", (event) => {
+    registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       const body = {
@@ -36,9 +37,7 @@ class Register {
         username: username.value,
       };
 
-      ApiRequests.registerRequest(body);
-
-      event.preventDefault();
+      await ApiRequests.registerRequest(body);
     });
   }
 }

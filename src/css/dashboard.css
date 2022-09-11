@@ -1,0 +1,402 @@
+body {
+  background-color: var(--primary-light);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+}
+
+header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+#logout:hover {
+  scale: 1.2;
+}
+
+.container {
+  margin: 10px 8%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#greetings_area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#greetings_area > p {
+  text-align: center;
+}
+
+.actions {
+  margin-top: 20px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+  max-width: 400px;
+}
+
+#actions_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 300px;
+}
+
+#actions_list > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid lightgrey;
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  font-size: 14px;
+}
+#actions_list > li:hover {
+  color: rgba(185, 0, 0, 0.6);
+  border: 3px solid rgba(185, 0, 0, 0.6);
+  box-shadow: none;
+  transform: translateX(0px) translateY(5px);
+}
+
+.sectors {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+#sector_list {
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+  height: 42px;
+  border-radius: 8px;
+}
+
+.card2:hover {
+  scale: 1.5;
+  transition: smooth;
+}
+
+.card2 > img {
+  width: 30px;
+}
+
+#return_menu {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  width: 100px;
+}
+
+.return_menu {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  width: 100px;
+}
+
+.admin-form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.div-form {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-form > input {
+  padding: 12px;
+  width: 80%;
+  border: none;
+  border-radius: 2px;
+}
+
+.admin-form > button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 2px;
+}
+
+.companies_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 350px;
+  overflow: auto;
+  gap: 20px;
+  padding: 10px;
+  width: 90%;
+}
+
+.card3 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 8px;
+  padding: 10px;
+  width: 90%;
+}
+
+#search_form {
+  max-width: 300px;
+  max-height: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.card1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 200px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  padding: 10px;
+}
+
+#companies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 250px;
+  gap: 30px;
+  width: 90%;
+  overflow: auto;
+  padding: 20px;
+}
+
+.card_filter {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#departments_list {
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  height: 80%;
+  width: 90%;
+  gap: 50px;
+  padding: 15px 20px;
+  max-width: 300px;
+}
+
+#departments_list > li {
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  min-width: 80%;
+  padding: 20px;
+}
+
+.delete_button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  width: 100px;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verification {
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.close {
+  width: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.button_area {
+  display: flex;
+  gap: 20px;
+}
+
+.yes {
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.no {
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+.wait_list {
+  display: flex;
+  width: 90%;
+  height: 70%;
+  overflow: auto;
+  gap: 60px;
+  max-width: 400px;
+  padding: 8px;
+  align-items: center;
+  animation: cycle 2s;
+}
+
+.card4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  min-width: 90%;
+  padding: 10px;
+  max-height: 70%;
+  border-radius: 8px;
+}
+
+.hire_button {
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  height: 50px;
+}
+
+.fire_button {
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  height: 50px;
+}
+
+.modify_button {
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  height: 50px;
+}
+
+.departments_list {
+  display: flex;
+  max-height: 180px;
+  overflow: auto;
+  padding: 20px;
+  gap: 40px;
+  width: 80%;
+}
+
+#modify_area > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+}
+
+#modify_area > div > input {
+  border: none;
+  width: 90%;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  #sector_list {
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 20px;
+    width: 90%;
+  }
+
+  #companies {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    width: 500px;
+    height: 380px;
+  }
+
+  .card2 {
+    width: 200px;
+    height: 100px;
+    margin: 0 10px;
+  }
+
+  .card2:hover {
+    scale: 1.5;
+  }
+
+  .card2 > img {
+    width: 80px;
+  }
+}

@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="./src/css/colors.css" />
     <link rel="stylesheet" href="./src/css/index.css" />
 
+    <script type="module" defer src="./src/js/index/index.js"></script>
+    <script type="module" defer src="./src/js/index/login.js"></script>
+    <script type="module" defer src="./src/js/index/register.js"></script>
+
     <link rel="icon" href="./src/assets/favicon.jpg" />
 
     <title>QubitCompany - 0, 1, ou mais soluções para sua empresa</title>
@@ -22,8 +26,8 @@
       </div>
       <nav>
         <div id="login-register">
-          <span id="login" class="text3 button">Login</span>
-          <span id="register" class="text3 button">Cadastro</span>
+          <span id="login" class="white text2 button">Login</span>
+          <span id="register" class="white text2 button">Cadastro</span>
         </div>
       </nav>
     </header>
@@ -44,7 +48,7 @@
             src="./src/assets/close.png"
           />
           <h2 class="title1 white">Cadastro</h2>
-          <form>
+          <form id="register_form">
             <input
               id="register_username"
               type="text"
@@ -72,7 +76,11 @@
                 <option class="grey1 text3">Master</option>
               </select>
             </div>
-            <button id="register-button" class="button grey1 text1">
+            <button
+              type="submit"
+              id="register-button"
+              class="button grey1 text1"
+            >
               Cadastrar
             </button>
           </form>
@@ -105,7 +113,9 @@
               type="password"
               placeholder="Digite a senha"
             />
-            <button id="login-button" class="button grey1 text1">Entrar</button>
+            <button type="button" id="login-button" class="button grey1 text1">
+              Entrar
+            </button>
           </form>
           <span class="white">Não é cadastrado ainda?</span>
           <div class="relocation_area button">
@@ -117,6 +127,4 @@
       </section>
     </main>
   </body>
-  <script type="module" src="./src/js/index.js"></script>
-  <script type="module" src="./src/js/register.js"></script>
 </html>
