@@ -1,6 +1,10 @@
 import { ApiRequests } from "../requests.js";
 
 class HomePage {
+  static async cleanToken() {
+    localStorage.clear;
+  }
+
   static async getCompanies() {
     const companies = await ApiRequests.companiesRequest();
 
@@ -81,7 +85,7 @@ class HomePage {
     });
   }
 }
-
+HomePage.cleanToken();
 HomePage.getCompanies();
 HomePage.getSectors();
 HomePage.filterCompanies();

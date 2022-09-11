@@ -205,4 +205,17 @@ export class ApiRequests {
       })
       .catch((erro) => console.log(erro));
   }
+
+  static async modifyRequest(id, body) {
+    await fetch(`${this.baseUrl}admin/update_user/${id}`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => console.log(erro));
+  }
 }

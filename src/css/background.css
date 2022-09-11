@@ -103,3 +103,7 @@ input {
 .fire_button {
   background-color: red;
 }
+
+.modify_button {
+  background-color: orange;
+}

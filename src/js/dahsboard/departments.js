@@ -1,6 +1,6 @@
 import { ApiRequests } from "../requests.js";
 import { Companies } from "./companies.js";
-import { Dashboard } from "./dashboardAdmin.js";
+import { DashboardAdmin } from "./dashboardAdmin.js";
 import { Sectors } from "./sectors.js";
 
 export class Departments {
@@ -97,7 +97,7 @@ export class Departments {
     const returnMain = document.querySelector("#return_main");
     const actionsList = document.querySelector("#actions_list");
 
-    Dashboard.createMenu(returnMain, actionsList);
+    DashboardAdmin.createMenu(returnMain, actionsList);
   }
 
   static async returnMain2() {
@@ -544,6 +544,7 @@ export class Departments {
 
         this.hireEmployersMenu();
         this.fireEmployersMenu();
+        this.modificationsEmployersMenu();
         this.returnMain3();
       }, 2000);
     });
@@ -970,14 +971,156 @@ export class Departments {
     });
   }
 
-  static modificationsEmployersMenu() {
+  static async modificationsEmployersMenu() {
+    const users = await ApiRequests.getUsers();
+    const departments = await ApiRequests.allDepartments();
     const modifications = document.querySelector("#modifications");
     const actions = document.querySelector(".actions");
     const presentation = document.querySelector("#presentation");
 
     modifications.addEventListener("click", () => {
-      presentation.innerText = "Selecione o funcionário que deseja modificar";
-      actions.innerHTML = "";
+      setTimeout(async () => {
+        presentation.innerText = "Selecione o funcionário que deseja modificar";
+        actions.innerHTML = "";
+
+        const modifyArea = document.createElement("form");
+        const employerFilter = document.createElement("select");
+        const emptyOption = document.createElement("option");
+        const employerCard = document.createElement("div");
+        const userName = document.createElement("h3");
+        const department = document.createElement("span");
+        const profLevel = document.createElement("span");
+        const kindOfWork = document.createElement("span");
+        const profLevelArea = document.createElement("div");
+        const profLevelLabel = document.createElement("label");
+        const profLevelInput = document.createElement("input");
+        const kindOfWorkArea = document.createElement("div");
+        const kindOfWorkLabel = document.createElement("label");
+        const kindOfWorkInput = document.createElement("input");
+        const modifyButton = document.createElement("button");
+
+        modifyArea.classList.add("admin-form");
+        employerCard.classList.add("card4");
+        employerFilter.classList.add("employer_filter");
+        userName.classList.add("white");
+        userName.classList.add("title3");
+        department.classList.add("white");
+        department.classList.add("text1");
+        kindOfWork.classList.add("white");
+        kindOfWork.classList.add("text2");
+        profLevel.classList.add("white");
+        profLevel.classList.add("text2");
+        profLevelLabel.classList.add("white");
+        profLevelLabel.classList.add("text2");
+        kindOfWorkLabel.classList.add("white");
+        kindOfWorkLabel.classList.add("text2");
+        profLevel.classList.add("white");
+        profLevel.classList.add("text2");
+        modifyButton.classList.add("button");
+        modifyButton.classList.add("white");
+        modifyButton.classList.add("modify_button");
+
+        modifyButton.type = "submit";
+
+        modifyArea.id = "modify_area";
+        profLevelInput.id = "prof_level";
+        kindOfWorkInput.id = "kind_of_work";
+
+        employerFilter.append(emptyOption);
+
+        users.forEach(({ username }) => {
+          const employerOption = document.createElement("option");
+          employerOption.innerText = username;
+          employerFilter.append(employerOption);
+        });
+
+        profLevelInput.placeholder = "Digite o nível profissional";
+        kindOfWorkInput.placeholder = "Digite o regime de trabalho";
+
+        profLevelLabel.innerText = "Nível profissional: ";
+        kindOfWorkLabel.innerText = "Regime: ";
+        modifyButton.innerText = "Modificar";
+
+        modifyArea.append(employerFilter);
+
+        await employerFilter.addEventListener("change", async () => {
+          const selected = employerFilter.value;
+          const user = users.filter(({ username }) => username == selected)[0];
+          const userDepartment = departments.filter(
+            ({ uuid }) => uuid == user.department_uuid
+          )[0];
+
+          userName.innerText = user.username;
+
+          if (userDepartment) {
+            department.innerText = `Departmento: ${userDepartment.name}`;
+          } else {
+            department.innerText = `Departmento: null`;
+          }
+
+          profLevel.innerText = `Nível: ${user.professional_level}`;
+          kindOfWork.innerText = `Regime: ${user.kind_of_work}`;
+          employerCard.append(userName, department, profLevel, kindOfWork);
+          modifyArea.append(employerCard, modifyButton);
+        });
+
+        profLevelArea.append(profLevelLabel, profLevelInput);
+        kindOfWorkArea.append(kindOfWorkLabel, kindOfWorkInput);
+        modifyArea.append(profLevelArea, kindOfWorkArea);
+        actions.append(modifyArea);
+
+        this.newModify();
+      }, 2000);
+    });
+  }
+
+  static async newModify() {
+    const users = await ApiRequests.getUsers();
+    const employerFilter = document.querySelector("employer_filter");
+    const modifyArea = document.querySelector("#modify_area");
+    const newProofLevel = document.querySelector("#prof_level");
+    const newKindOfWork = document.querySelector("#kind_of_work");
+    const modal = document.querySelector(".modify_verification");
+
+    modifyArea.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      modal.classList.toggle("hidden");
+
+      const userId = users.filter(({ name }) => name == employerFilter)[0].uuid;
+
+      const body = {
+        kind_of_work: newKindOfWork.value,
+        professional_level: newProofLevel.value,
+      };
+
+      this.openModifyModal(userId, body);
+    });
+
+    this.closeModalModify();
+  }
+
+  static openModifyModal(userId, body) {
+    const modal = document.querySelector(".modify_verification");
+
+    const yes = document.querySelector("#yes_modify");
+    const no = document.querySelector("#no_modify");
+
+    yes.addEventListener("click", async () => {
+      await ApiRequests.modifyRequest(userId, body);
+    });
+
+    no.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeModalModify() {
+    const close = document.querySelector("#close-modify");
+    const modal = document.querySelector(".modify_verification");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
     });
   }
 }

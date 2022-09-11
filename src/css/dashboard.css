@@ -338,6 +338,13 @@ header > div {
   height: 50px;
 }
 
+.modify_button {
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  height: 50px;
+}
+
 .departments_list {
   display: flex;
   max-height: 180px;
@@ -345,6 +352,20 @@ header > div {
   padding: 20px;
   gap: 40px;
   width: 80%;
+}
+
+#modify_area > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+}
+
+#modify_area > div > input {
+  border: none;
+  width: 90%;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 @media (min-width: 768px) {

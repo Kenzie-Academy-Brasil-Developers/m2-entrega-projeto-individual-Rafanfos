@@ -2,14 +2,17 @@ import { Companies } from "./companies.js";
 import { Departments } from "./departments.js";
 import { Sectors } from "./sectors.js";
 
-export class Dashboard {
+export class DashboardAdmin {
   static verification() {
     const body = document.querySelector("body");
     const token = localStorage.getItem("@QubitCompany:token") || "";
 
     body.classList.add("forbidden");
 
-    if (!token) {
+    if (
+      token !==
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMTIxNDlmYWQtMWY0OC00YTk4LThiYjYtMTNlYTk4OTc1OTFlIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTY2MjkwNTMyNywiZXhwIjoxNjYzNzY5MzI3LCJzdWIiOiJbb2JqZWN0IFVuZGVmaW5lZF0ifQ.khxMcGJjd2qicBcytbGOomfJhwnYqoSL6Ixd6uEKhIg"
+    ) {
       window.location.replace("../../index.html");
     } else {
       body.classList.toggle("forbidden");
@@ -70,5 +73,5 @@ export class Dashboard {
   }
 }
 
-Dashboard.verification();
-Dashboard.logout();
+DashboardAdmin.verification();
+DashboardAdmin.logout();

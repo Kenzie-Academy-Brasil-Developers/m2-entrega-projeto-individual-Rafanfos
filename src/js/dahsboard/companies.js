@@ -1,5 +1,5 @@
 import { ApiRequests } from "../requests.js";
-import { Dashboard } from "./dashboardAdmin.js";
+import { DashboardAdmin } from "./dashboardAdmin.js";
 import { Sectors } from "./sectors.js";
 
 export class Companies {
@@ -65,7 +65,7 @@ export class Companies {
     const returnMain = document.querySelector("#return_main");
     const actionsList = document.querySelector("#actions_list");
 
-    Dashboard.createMenu(returnMain, actionsList);
+    DashboardAdmin.createMenu(returnMain, actionsList);
   }
 
   static async createCompanyForm() {
