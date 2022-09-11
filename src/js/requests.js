@@ -123,6 +123,20 @@ export class ApiRequests {
       .catch((erro) => console.log(erro));
   }
 
+  static async allDepartments() {
+    const departments = await fetch(`${this.baseUrl}departments`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        return resp;
+      })
+      .catch((erro) => console.log(erro));
+
+    return departments;
+  }
+
   static async companyDepartments(id) {
     const departments = await fetch(`${this.baseUrl}departments/${id}`, {
       method: "GET",
@@ -141,6 +155,33 @@ export class ApiRequests {
     await fetch(`${this.baseUrl}departments/${id}`, {
       method: "DELETE",
       headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => console.log(erro));
+  }
+
+  static async getWaitList() {
+    const waitList = await fetch(`${this.baseUrl}admin/out_of_work`, {
+      method: "GET",
+      headers: this.headers,
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        return resp;
+      })
+      .catch((erro) => console.log(erro));
+
+    return waitList;
+  }
+
+  static async hireRequest(body) {
+    await fetch(`${this.baseUrl}departments/hire/`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
       .then((resp) => {

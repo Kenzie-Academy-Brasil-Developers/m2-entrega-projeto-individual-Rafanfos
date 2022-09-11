@@ -80,7 +80,7 @@ input {
   background-color: red;
 }
 
-#delete_verification {
+.verification {
   background-color: var(--primary-dark);
 }
 
@@ -90,4 +90,12 @@ input {
 
 .no {
   background-color: red;
+}
+
+.card4 {
+  background-color: var(--primary-dark);
+}
+
+.hire_button {
+  background-color: green;
 }

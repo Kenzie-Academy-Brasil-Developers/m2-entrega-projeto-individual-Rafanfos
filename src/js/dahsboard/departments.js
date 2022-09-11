@@ -100,6 +100,7 @@ export class Departments {
 
         this.newDepartments();
         this.listDepartments();
+        this.employersActions();
         this.returnMain();
       }, 2000);
     });
@@ -338,12 +339,12 @@ export class Departments {
     const modal = document.querySelector(".delete_verification");
 
     deleteButton.addEventListener("click", () => {
-      this.closeModal();
+      this.closeModalDelete();
 
       modal.classList.toggle("hidden");
 
-      const yes = document.querySelector(".yes");
-      const no = document.querySelector(".no");
+      const yes = document.querySelector("#yes_delete");
+      const no = document.querySelector("#yes_delete");
 
       yes.addEventListener("click", async () => {
         await ApiRequests.deleteDepartmentRequest(id);
@@ -355,9 +356,240 @@ export class Departments {
     });
   }
 
-  static closeModal() {
-    const close = document.querySelector(".close");
+  static closeModalDelete() {
+    const close = document.querySelector("#delete_close");
     const modal = document.querySelector(".delete_verification");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static employersActions() {
+    const employers = document.querySelector("#employers");
+    const actionsList = document.querySelector("#actions_list");
+
+    this.createEmployersMenu(employers, actionsList);
+  }
+
+  static createEmployersMenu(button, area) {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      setTimeout(() => {
+        area.innerHTML = "";
+
+        const hire = document.createElement("li");
+        const fire = document.createElement("li");
+        const modifications = document.createElement("li");
+        const returnMain = document.createElement("li");
+
+        hire.classList.add("grey2");
+        hire.classList.add("text2");
+        hire.classList.add("button");
+        fire.classList.add("grey2");
+        fire.classList.add("text2");
+        fire.classList.add("button");
+        modifications.classList.add("grey2");
+        modifications.classList.add("text2");
+        modifications.classList.add("button");
+        returnMain.classList.add("grey2");
+        returnMain.classList.add("text2");
+        returnMain.classList.add("button");
+
+        hire.id = "hire_button";
+        fire.id = "fire_button";
+        modifications.id = "modifications";
+        returnMain.id = "return_menu2";
+
+        hire.innerText = "Contratações";
+        fire.innerText = "Demissões";
+        modifications.innerText = "Modificações";
+        returnMain.innerText = "Voltar";
+
+        area.append(hire, fire, modifications, returnMain);
+
+        this.hireEmployersMenu();
+        this.returnMain3();
+      }, 2000);
+    });
+  }
+
+  static returnMain3() {
+    const returnMenu = document.querySelector("#return_menu2");
+    const actionsList = document.querySelector("#actions_list");
+
+    this.createEmployersMenu(returnMenu, actionsList);
+  }
+
+  static async hireEmployersMenu() {
+    const hire = document.querySelector("#hire_button");
+    const presentation = document.querySelector("#presentation");
+    const actions = document.querySelector(".actions");
+    const companies = await ApiRequests.companiesRequest();
+
+    hire.addEventListener("click", () => {
+      setTimeout(async () => {
+        presentation.innerText =
+          "Filtre empresa e departamento, depois selecione o funcionário que deseja contratar.";
+        actions.innerHTML = "";
+
+        const hireForm = document.createElement("form");
+        const filterCompanyArea = document.createElement("div");
+        const filterCompanyTitle = document.createElement("label");
+        const filterCompany = document.createElement("select");
+        const filterDepartmentArea = document.createElement("div");
+        const filterDepartmentTitle = document.createElement("label");
+        const filterDepartment = document.createElement("select");
+        const emptyOption = document.createElement("option");
+        const waitList = document.createElement("ul");
+        const returnButton = document.createElement("button");
+
+        hireForm.classList.add("admin-form");
+        waitList.classList.add("wait_list");
+        filterCompanyTitle.classList.add("white");
+        filterCompany.classList.add("filter_company");
+        filterDepartmentTitle.classList.add("white");
+        filterDepartment.classList.add("filter_department");
+        returnButton.classList.add("button");
+        returnButton.classList.add("white");
+        returnButton.classList.add("return_menu");
+
+        returnButton.id = "return_main";
+
+        returnButton.innerText = "Voltar";
+
+        filterCompany.append(emptyOption);
+        filterCompanyArea.append(filterCompanyTitle, filterCompany);
+        filterDepartmentArea.append(filterDepartmentTitle, filterDepartment);
+        hireForm.append(
+          filterCompanyArea,
+          filterDepartmentArea,
+          waitList,
+          returnButton
+        );
+        actions.append(hireForm);
+
+        companies.forEach(({ name }) => {
+          const companyOption = document.createElement("option");
+
+          companyOption.innerText = name;
+          filterCompany.append(companyOption);
+        });
+
+        filterCompany.addEventListener("change", async () => {
+          filterDepartment.innerHTML = "";
+          waitList.innerHTML = "";
+          filterDepartment.append(emptyOption);
+          const companyselelected = filterCompany.value;
+          const companyId = companies.filter(
+            (company) => companyselelected == company.name
+          )[0].uuid;
+          filterCompany.id = companyId;
+
+          const selectedCompany = document.querySelector(".filter_company");
+
+          const companyUuidd = selectedCompany.id;
+
+          const departments = await ApiRequests.companyDepartments(
+            companyUuidd
+          );
+
+          departments.forEach(({ name }) => {
+            const departmentsOption = document.createElement("option");
+
+            departmentsOption.innerText = name;
+            filterDepartment.append(departmentsOption);
+          });
+
+          const waitListUsers = await ApiRequests.getWaitList();
+
+          waitListUsers.forEach(
+            ({ username, kind_of_work, professional_level, uuid }) => {
+              const user = document.createElement("li");
+              const userName = document.createElement("h3");
+              const kindOfWork = document.createElement("span");
+              const profLevel = document.createElement("span");
+              const hireButton = document.createElement("button");
+
+              user.classList.add("card4");
+              userName.classList.add("white");
+              userName.classList.add("title3");
+              kindOfWork.classList.add("white");
+              kindOfWork.classList.add("text2");
+              profLevel.classList.add("white");
+              profLevel.classList.add("text2");
+              hireButton.classList.add("button");
+              hireButton.classList.add("white");
+              hireButton.classList.add("hire_button");
+
+              user.id = uuid;
+
+              userName.innerText = username;
+              kindOfWork.innerText = `Regime: ${kind_of_work}`;
+              profLevel.innerText = `Nível profissional: ${professional_level}`;
+              hireButton.innerText = "Contratar";
+
+              user.append(userName, kindOfWork, profLevel, hireButton);
+              waitList.append(user);
+            }
+          );
+        });
+        this.returnMain();
+        this.newHire();
+      }, 2000);
+    });
+  }
+
+  static async newHire() {
+    const departments = await ApiRequests.allDepartments();
+    const waitList = document.querySelector(".wait_list");
+    const modal = document.querySelector(".hire_verification");
+    const department = document.querySelector(".filter_department");
+
+    waitList.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const selectedDepartment = department.value;
+      const clicked = event.target;
+
+      if (clicked.tagName == "BUTTON" || clicked.innerText == "Contratar") {
+        const departmentUuidd = departments.filter(
+          ({ name }) => name == selectedDepartment
+        )[0].uuid;
+
+        const userUuid = clicked.closest("li").id;
+
+        const body = {
+          department_uuid: departmentUuidd,
+          user_uuid: userUuid,
+        };
+
+        console.log(body);
+        modal.classList.toggle("hidden");
+        this.openHireModal(body);
+        this.closeModalHire();
+      }
+    });
+  }
+
+  static openHireModal(body) {
+    const modal = document.querySelector(".hire_verification");
+
+    const yes = document.querySelector("#yes_hire");
+    const no = document.querySelector("#no_hire");
+
+    yes.addEventListener("click", async () => {
+      await ApiRequests.hireRequest(body);
+    });
+
+    no.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
+  }
+
+  static closeModalHire() {
+    const close = document.querySelector("#close-hire");
+    const modal = document.querySelector(".hire_verification");
 
     close.addEventListener("click", () => {
       modal.classList.toggle("hidden");

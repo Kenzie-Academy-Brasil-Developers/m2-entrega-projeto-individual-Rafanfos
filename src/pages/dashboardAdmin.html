@@ -49,7 +49,7 @@
         </ul>
       </section>
       <section class="modal-wrapper delete_verification hidden">
-        <div id="delete_verification">
+        <div id="delete_verification" class="verification">
           <img
             id="close-delete"
             class="close button"
@@ -57,8 +57,18 @@
           />
           <p class="white">Deseja apagar esse departamento da empresa?</p>
           <div class="button_area">
-            <button class="button yes white">Sim</button>
-            <button class="button no white">Não</button>
+            <button class="button yes white" id="yes_delete">Sim</button>
+            <button class="button no white" id="no_delete">Não</button>
+          </div>
+        </div>
+      </section>
+      <section class="modal-wrapper hire_verification hidden">
+        <div id="hire_verification" class="verification">
+          <img id="close-hire" class="close button" src="../assets/close.png" />
+          <p class="white">Deseja contratar esse funcionário?</p>
+          <div class="button_area">
+            <button class="button yes white" id="yes_hire">Sim</button>
+            <button class="button no white" id="no_hire">Não</button>
           </div>
         </div>
       </section>
