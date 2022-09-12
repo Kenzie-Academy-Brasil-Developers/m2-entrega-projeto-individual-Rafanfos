@@ -25,12 +25,12 @@
     <script type="module" defer src="../js/dahsboard/companies.js"></script>
     <script type="module" defer src="../js/dahsboard/sectors.js"></script>
     <script type="module" defer src="../js/dahsboard/departments.js"></script>
-    <!-- <script defer src="../js/toast.js"></script> -->
     <script
       type="text/javascript"
       defer
       src="https://cdn.jsdelivr.net/npm/toastify-js"
     ></script>
+    <script defer src="../js/dark-light_mode.js"></script>
 
     <link rel="icon" href="../assets/favicon.jpg" />
 
@@ -40,13 +40,16 @@
     <header class="white">
       <div>
         <h2 class="title2">QubitCompany</h2>
-        <span id="logout" class="text2 button">Logout</span>
+        <div>
+          <button class="mode-button button">Light Mode</button>
+          <span id="logout" class="text2 button">Logout</span>
+        </div>
       </div>
     </header>
     <main class="container">
       <section id="greetings_area">
-        <h1 class="primary3 title1">Bem vindo Admin!</h1>
-        <p id="presentation" class="primary3 title2">
+        <h1 class="grey1 title1">Bem vindo Admin!</h1>
+        <p id="presentation" class="grey1 title2">
           Navegue entre as opções abaixo
         </p>
       </section>

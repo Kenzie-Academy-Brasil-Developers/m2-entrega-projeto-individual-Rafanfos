@@ -233,8 +233,11 @@ export class Companies {
           departmentsList.classList.add("departments_list");
           employeesTitle.classList.add("grey1");
           employeesTitle.classList.add("text1");
+          employeesList.classList.add("employees_list");
           openingHours.classList.add("text2");
+          openingHours.classList.add("grey1");
           companySector.classList.add("text2");
+          companySector.classList.add("grey1");
 
           companyName.innerText = name;
           departmentsTitle.innerText = "Departamentos";

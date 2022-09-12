@@ -30,7 +30,8 @@ class HomePage {
       card.classList.add("card1");
       companyName.classList.add("title3");
       companyName.classList.add("grey1");
-      companySector.classList.add("text3");
+      companySector.classList.add("text2");
+      companySector.classList.add("grey1");
       companyDescription.classList.add("text2");
       companyDescription.classList.add("grey1");
 

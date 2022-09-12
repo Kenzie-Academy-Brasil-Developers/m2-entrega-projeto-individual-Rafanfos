@@ -1,3 +1,15 @@
+body {
+  background-color: var(--default);
+}
+
+select {
+  background-color: var(--default);
+}
+
+input {
+  background-color: var(--default);
+}
+
 .forbidden {
   filter: blur(16px);
   background-color: rgba(0, 0, 0, 0.8);
@@ -40,8 +52,10 @@ input {
   background: linear-gradient(30deg, #808080, #ffff, #c0c0c0, #ffff, #dcdcdc);
 }
 
-.actions > ul > li {
-  background-color: white;
+#create_company_button,
+#create_department_button,
+#upgrade-button {
+  background-color: var(--default);
 }
 
 .card2 {
@@ -59,10 +73,6 @@ input {
 .admin-form {
   background-color: var(--primary);
 }
-
-/* .admin-form > button {
-  background-color: white;
-} */
 
 .return_menu {
   background-color: var(--primary-dark);
@@ -114,4 +124,11 @@ input {
 
 #upgrade {
   background-color: var(--primary);
+}
+.card3 {
+  background-color: var(--default);
+}
+
+#companies {
+  background-color: var(--default);
 }

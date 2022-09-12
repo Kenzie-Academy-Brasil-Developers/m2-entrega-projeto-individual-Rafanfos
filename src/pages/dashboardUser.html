@@ -16,8 +16,9 @@
     
 
     <script type="module" defer src="../js/dahsboard/dashboardUser.js"></script>
-    <!-- <script defer src="../js/toast.js"></script> -->
+    
     <script type="text/javascript" defer src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/dark-light_mode.js"></script>
 
     <title>QubitCompany - Dashboard Usuário</title>
   </head>
@@ -25,7 +26,10 @@
     <header class="white">
       <div>
         <h2 class="title2">QubitCompany</h2>
-        <span id="logout" class="text2 button">Logout</span>
+        <div>
+          <button class="mode-button button">Light Mode</button>
+          <span id="logout" class="text2 button">Logout</span>
+        </div>
       </div>
     </header>
     <main></main>

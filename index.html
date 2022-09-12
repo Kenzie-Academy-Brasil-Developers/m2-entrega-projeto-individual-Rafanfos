@@ -24,6 +24,7 @@
       defer
       src="https://cdn.jsdelivr.net/npm/toastify-js"
     ></script>
+    <script defer src="./src/js/dark-light_mode.js"></script>
 
     <link rel="icon" href="./src/assets/favicon.jpg" />
 
@@ -35,6 +36,7 @@
         <h2 class="title2">QubitCompany</h2>
       </div>
       <nav>
+        <button class="mode-button button">Light Mode</button>
         <div id="login-register">
           <span id="login" class="white text2 button">Login</span>
           <span id="register" class="white text2 button">Cadastro</span>
@@ -42,9 +44,9 @@
       </nav>
     </header>
     <main class="container">
-      <h2 class="title2">Empresas participantes</h2>
+      <h2 class="title2 grey1">Empresas participantes</h2>
       <form>
-        <label class="text1" for="sector_filter">Filtrar por setor</label>
+        <label class="text1 grey1" for="sector_filter">Filtrar por setor</label>
         <select id="sector_filter">
           <option></option>
         </select>

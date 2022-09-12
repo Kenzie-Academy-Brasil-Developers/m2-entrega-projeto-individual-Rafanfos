@@ -27,7 +27,7 @@ class DashboardUser {
   static async renderUserDashboard() {
     const companies = await ApiRequests.companiesRequest();
     const logged = await ApiRequests.getUserProfile();
-    const workDepartment = await ApiRequests.getEmployersDepartment();
+    const workDepartment = await ApiRequests.getEmployeesDepartment();
 
     const workCompany = companies.filter(
       ({ uuid }) => uuid == workDepartment[0].company_uuid
@@ -41,7 +41,7 @@ class DashboardUser {
     const company = document.createElement("h2");
     const department = document.createElement("h2");
     const team = document.createElement("h2");
-    const employersList = document.createElement("ul");
+    const employeesList = document.createElement("ul");
     const editInformation = document.createElement("button");
 
     greetings.classList.add("grey1");
@@ -52,7 +52,7 @@ class DashboardUser {
     department.classList.add("text1");
     team.classList.add("grey1");
     team.classList.add("text1");
-    employersList.classList.add("employers_list");
+    employeesList.classList.add("employees_list");
     editInformation.classList.add("button");
     editInformation.classList.add("white");
     editInformation.classList.add("edit_information");
@@ -85,7 +85,7 @@ class DashboardUser {
           profLevel.innerText = `Nível: ${professional_level}`;
 
           user.append(userName, profLevel, kindOfWork);
-          employersList.append(user);
+          employeesList.append(user);
         }
       );
     } else {
@@ -97,7 +97,7 @@ class DashboardUser {
       company,
       department,
       team,
-      employersList,
+      employeesList,
       editInformation
     );
 

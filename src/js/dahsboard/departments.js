@@ -299,7 +299,9 @@ export class Departments {
 
         departmentCard.classList.add("card1");
         departmentName.classList.add("title3");
+        departmentName.classList.add("grey1");
         departmentDescription.classList.add("text2");
+        departmentDescription.classList.add("grey1");
         deleteButton.classList.add("button");
         deleteButton.classList.add("white");
         deleteButton.classList.add("delete_button");
@@ -545,8 +547,8 @@ export class Departments {
         area.append(hire, fire, modifications, returnMain);
 
         this.hireemployeesMenu();
-        this.fireemployeesMenu();
-        this.modificationsemployeesMenu();
+        this.fireEmployeesMenu();
+        this.modificationsEmployeesMenu();
         this.returnMain3();
       }, 1000);
     });
