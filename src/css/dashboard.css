@@ -312,16 +312,27 @@ header > div {
   animation: cycle 2s;
 }
 
+.employers_list {
+  display: flex;
+  gap: 50px;
+  width: 90%;
+  max-width: 500px;
+  padding: 10px;
+  height: 140px;
+  overflow: auto;
+}
+
 .card4 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 15px;
-  min-width: 90%;
-  padding: 10px;
+  gap: 10px;
+  min-width: 80%;
+  padding: 10px 20px;
   max-height: 70%;
   border-radius: 8px;
+  padding: 10px;
 }
 
 .hire_button {
@@ -368,6 +379,21 @@ header > div {
   border-radius: 8px;
 }
 
+.edit_information {
+  border-radius: 2px;
+  border: none;
+  padding: 10px;
+  height: 50px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin: 0 8%;
+}
+
 @media (min-width: 768px) {
   #sector_list {
     flex-direction: row;
@@ -398,5 +424,9 @@ header > div {
 
   .card2 > img {
     width: 80px;
+  }
+
+  .card4 {
+    min-width: 200px;
   }
 }

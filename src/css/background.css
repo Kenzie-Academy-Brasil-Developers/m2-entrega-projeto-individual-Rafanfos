@@ -107,3 +107,7 @@ input {
 .modify_button {
   background-color: orange;
 }
+
+.edit_information {
+  background-color: var(--primary-dark);
+}

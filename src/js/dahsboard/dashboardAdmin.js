@@ -9,10 +9,7 @@ export class DashboardAdmin {
 
     body.classList.add("forbidden");
 
-    if (
-      token !==
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiMTIxNDlmYWQtMWY0OC00YTk4LThiYjYtMTNlYTk4OTc1OTFlIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTY2MjkwNTMyNywiZXhwIjoxNjYzNzY5MzI3LCJzdWIiOiJbb2JqZWN0IFVuZGVmaW5lZF0ifQ.khxMcGJjd2qicBcytbGOomfJhwnYqoSL6Ixd6uEKhIg"
-    ) {
+    if (!token) {
       window.location.replace("../../index.html");
     } else {
       body.classList.toggle("forbidden");
@@ -34,6 +31,7 @@ export class DashboardAdmin {
       setTimeout(() => {
         area.innerHTML = "";
 
+        const actionsList = document.createElement("ul");
         const sectors = document.createElement("li");
         const companies = document.createElement("li");
         const departments = document.createElement("li");
@@ -48,6 +46,7 @@ export class DashboardAdmin {
         departments.classList.add("text2");
         departments.classList.add("button");
 
+        actionsList.id = "actions_list";
         sectors.id = "sectors_button";
         companies.id = "companies_button";
         departments.id = "departments_button";
@@ -56,7 +55,8 @@ export class DashboardAdmin {
         companies.innerText = "Empresas";
         departments.innerText = "Departamentos";
 
-        area.append(sectors, companies, departments);
+        actionsList.append(sectors, companies, departments);
+        area.append(actionsList);
 
         Sectors.openSectors();
         Companies.openCompanies();

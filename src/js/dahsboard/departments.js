@@ -4,7 +4,7 @@ import { DashboardAdmin } from "./dashboardAdmin.js";
 import { Sectors } from "./sectors.js";
 
 export class Departments {
-  static openDepartments() {
+  static async openDepartments() {
     const departmentsButton = document.querySelector("#departments_button");
     const actionsList = document.querySelector("#actions_list");
 
@@ -95,9 +95,9 @@ export class Departments {
 
   static async returnMain() {
     const returnMain = document.querySelector("#return_main");
-    const actionsList = document.querySelector("#actions_list");
+    const actions = document.querySelector(".actions");
 
-    DashboardAdmin.createMenu(returnMain, actionsList);
+    DashboardAdmin.createMenu(returnMain, actions);
   }
 
   static async returnMain2() {
@@ -438,6 +438,7 @@ export class Departments {
         });
 
         filterDepartment.addEventListener("change", async () => {
+          employersList.innerHTML = "";
           const companyUuid = companies.filter(
             ({ name }) => name == filterCompany.value
           )[0].uuid;
@@ -681,17 +682,22 @@ export class Departments {
   }
 
   static async newHire() {
-    const departments = await ApiRequests.allDepartments();
     const waitList = document.querySelector(".wait_list");
     const modal = document.querySelector(".hire_verification");
     const department = document.querySelector(".filter_department");
+    const selectedCompany = document.querySelector(".filter_company");
 
     waitList.addEventListener("click", async (event) => {
       event.preventDefault();
+
       const selectedDepartment = department.value;
       const clicked = event.target;
 
       if (clicked.tagName == "BUTTON" || clicked.innerText == "Contratar") {
+        const companyUuid = selectedCompany.id;
+
+        const departments = await ApiRequests.companyDepartments(companyUuid);
+
         const departmentUuidd = departments.filter(
           ({ name }) => name == selectedDepartment
         )[0].uuid;
@@ -703,7 +709,7 @@ export class Departments {
           user_uuid: userUuid,
         };
 
-        console.log(body);
+        console.log(departmentUuidd);
         modal.classList.toggle("hidden");
         this.openHireModal(body);
         this.closeModalHire();
@@ -732,37 +738,6 @@ export class Departments {
 
     close.addEventListener("click", () => {
       modal.classList.toggle("hidden");
-    });
-  }
-
-  static async newHire() {
-    const departments = await ApiRequests.allDepartments();
-    const waitList = document.querySelector(".wait_list");
-    const modal = document.querySelector(".hire_verification");
-    const department = document.querySelector(".filter_department");
-
-    waitList.addEventListener("click", async (event) => {
-      event.preventDefault();
-      const selectedDepartment = department.value;
-      const clicked = event.target;
-
-      if (clicked.tagName == "BUTTON" || clicked.innerText == "Contratar") {
-        const departmentUuidd = departments.filter(
-          ({ name }) => name == selectedDepartment
-        )[0].uuid;
-
-        const userUuid = clicked.closest("li").id;
-
-        const body = {
-          department_uuid: departmentUuidd,
-          user_uuid: userUuid,
-        };
-
-        console.log(body);
-        modal.classList.toggle("hidden");
-        this.openHireModal(body);
-        this.closeModalHire();
-      }
     });
   }
 
@@ -811,6 +786,7 @@ export class Departments {
         const filterDepartment = document.createElement("select");
         const emptyOption = document.createElement("option");
         const employersList = document.createElement("ul");
+        const fireButton = document.createElement("button");
         const returnButton = document.createElement("button");
 
         searchDepartmentForm.classList.add("admin-form");
@@ -819,6 +795,7 @@ export class Departments {
         filterCompany.classList.add("filter_company");
         filterDepartmentTitle.classList.add("white");
         filterDepartment.classList.add("filter_department");
+
         returnButton.classList.add("button");
         returnButton.classList.add("white");
         returnButton.classList.add("return_menu");
@@ -862,6 +839,7 @@ export class Departments {
         });
 
         filterDepartment.addEventListener("change", async () => {
+          employersList.innerHTML = "";
           const companyUuid = companies.filter(
             ({ name }) => name == filterCompany.value
           )[0].uuid;
@@ -927,10 +905,8 @@ export class Departments {
     });
   }
   static async newFire() {
-    const departments = await ApiRequests.allDepartments();
     const employersList = document.querySelector(".employers_list");
     const modal = document.querySelector(".fire_verification");
-    const department = document.querySelector(".filter_department");
 
     employersList.addEventListener("click", async (event) => {
       event.preventDefault();
@@ -941,7 +917,7 @@ export class Departments {
         const userUuid = clicked.closest("li").id;
         modal.classList.toggle("hidden");
 
-        this.openHireModal(userUuid);
+        this.openFireModal(userUuid);
         this.closeModalFire();
       }
     });
@@ -997,6 +973,7 @@ export class Departments {
         const kindOfWorkArea = document.createElement("div");
         const kindOfWorkLabel = document.createElement("label");
         const kindOfWorkInput = document.createElement("input");
+        const returnButton = document.createElement("button");
         const modifyButton = document.createElement("button");
 
         modifyArea.classList.add("admin-form");
@@ -1019,7 +996,15 @@ export class Departments {
         modifyButton.classList.add("button");
         modifyButton.classList.add("white");
         modifyButton.classList.add("modify_button");
+        returnButton.classList.add("button");
+        returnButton.classList.add("white");
+        returnButton.classList.add("return_menu");
 
+        returnButton.innerText = "Voltar";
+
+        returnButton.id = "return_main";
+
+        returnButton.type = "button";
         modifyButton.type = "submit";
 
         modifyArea.id = "modify_area";
@@ -1043,7 +1028,7 @@ export class Departments {
 
         modifyArea.append(employerFilter);
 
-        await employerFilter.addEventListener("change", async () => {
+        employerFilter.addEventListener("change", async () => {
           const selected = employerFilter.value;
           const user = users.filter(({ username }) => username == selected)[0];
           const userDepartment = departments.filter(
@@ -1066,17 +1051,18 @@ export class Departments {
 
         profLevelArea.append(profLevelLabel, profLevelInput);
         kindOfWorkArea.append(kindOfWorkLabel, kindOfWorkInput);
-        modifyArea.append(profLevelArea, kindOfWorkArea);
+        modifyArea.append(profLevelArea, kindOfWorkArea, returnButton);
         actions.append(modifyArea);
 
         this.newModify();
+        this.returnMain();
       }, 2000);
     });
   }
 
   static async newModify() {
     const users = await ApiRequests.getUsers();
-    const employerFilter = document.querySelector("employer_filter");
+    const employerFilter = document.querySelector(".employer_filter");
     const modifyArea = document.querySelector("#modify_area");
     const newProofLevel = document.querySelector("#prof_level");
     const newKindOfWork = document.querySelector("#kind_of_work");
@@ -1087,7 +1073,9 @@ export class Departments {
 
       modal.classList.toggle("hidden");
 
-      const userId = users.filter(({ name }) => name == employerFilter)[0].uuid;
+      const userId = users.filter(
+        ({ username }) => username == employerFilter.value
+      )[0].uuid;
 
       const body = {
         kind_of_work: newKindOfWork.value,
