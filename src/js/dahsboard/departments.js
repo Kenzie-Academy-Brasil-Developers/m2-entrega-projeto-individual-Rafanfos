@@ -1,4 +1,5 @@
 import { ApiRequests } from "../requests.js";
+import { Toast } from "../toast.js";
 import { Companies } from "./companies.js";
 import { DashboardAdmin } from "./dashboardAdmin.js";
 import { Sectors } from "./sectors.js";
@@ -698,46 +699,24 @@ export class Departments {
 
         const departments = await ApiRequests.companyDepartments(companyUuid);
 
-        const departmentUuidd = departments.filter(
-          ({ name }) => name == selectedDepartment
-        )[0].uuid;
+        if (selectedDepartment) {
+          const departmentUuidd = departments.filter(
+            ({ name }) => name == selectedDepartment
+          )[0].uuid;
+          const userUuid = clicked.closest("li").id;
 
-        const userUuid = clicked.closest("li").id;
+          const body = {
+            department_uuid: departmentUuidd,
+            user_uuid: userUuid,
+          };
 
-        const body = {
-          department_uuid: departmentUuidd,
-          user_uuid: userUuid,
-        };
-
-        console.log(departmentUuidd);
-        modal.classList.toggle("hidden");
-        this.openHireModal(body);
-        this.closeModalHire();
+          modal.classList.toggle("hidden");
+          this.openHireModal(body);
+          this.closeModalHire();
+        } else {
+          Toast.create("Selecione uma empresa e um departamento!");
+        }
       }
-    });
-  }
-
-  static openHireModal(body) {
-    const modal = document.querySelector(".hire_verification");
-
-    const yes = document.querySelector("#yes_hire");
-    const no = document.querySelector("#no_hire");
-
-    yes.addEventListener("click", async () => {
-      await ApiRequests.hireRequest(body);
-    });
-
-    no.addEventListener("click", () => {
-      modal.classList.toggle("hidden");
-    });
-  }
-
-  static closeModalHire() {
-    const close = document.querySelector("#close-hire");
-    const modal = document.querySelector(".hire_verification");
-
-    close.addEventListener("click", () => {
-      modal.classList.toggle("hidden");
     });
   }
 

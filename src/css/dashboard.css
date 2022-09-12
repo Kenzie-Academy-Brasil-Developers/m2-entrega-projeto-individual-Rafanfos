@@ -330,7 +330,7 @@ header > div {
   gap: 10px;
   min-width: 80%;
   padding: 10px 20px;
-  max-height: 70%;
+  max-height: 85%;
   border-radius: 8px;
   padding: 10px;
 }
@@ -392,6 +392,46 @@ main {
   align-items: center;
   gap: 30px;
   margin: 0 8%;
+}
+
+#upgrade {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 80%;
+  width: 80%;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 400px;
+  z-index: 1;
+}
+
+#upgrade > h2 {
+  text-align: center;
+}
+
+#upgrade_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 90%;
+}
+
+#upgrade_form > input {
+  border: none;
+  border-radius: 2px;
+  padding: 10px;
+  width: 90%;
+}
+
+#upgrade_form > button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
 }
 
 @media (min-width: 768px) {

@@ -1,3 +1,5 @@
+import { Toast } from "./toast.js";
+
 export class ApiRequests {
   static token = localStorage.getItem("@QubitCompany:token") || "";
   static baseUrl = "http://localhost:6280/";
@@ -41,10 +43,10 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
-
         if (resp.uuid) {
           return this.loginRequest(loginBody);
+        } else {
+          Toast.create("Insira dados válidos!");
         }
       })
       .catch((erro) => console.log(erro));
@@ -67,6 +69,8 @@ export class ApiRequests {
           } else {
             window.location.replace("./src/pages/dashboardUser.html");
           }
+        } else {
+          Toast.create("Usuário não existente, dados inválidos!");
         }
       })
       .catch((erro) => console.log(erro));
@@ -94,7 +98,9 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
+        if (resp.error) {
+          Toast.create("Preencha todos os campos!");
+        }
       })
       .catch((erro) => console.log(erro));
   }
@@ -121,7 +127,9 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
+        if (resp.error) {
+          Toast.create("Preencha todos os campos!");
+        }
       })
       .catch((erro) => console.log(erro));
   }
@@ -248,5 +256,23 @@ export class ApiRequests {
       .catch((erro) => console.log(erro));
 
     return user;
+  }
+
+  static async upgradeUserData(body) {
+    await fetch(`${this.baseUrl}users`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(body),
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.error) {
+          Toast.create("E-mail já existente, insira um e-mail novo!");
+        }
+        console.log(resp);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
   }
 }

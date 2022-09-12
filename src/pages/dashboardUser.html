@@ -12,8 +12,12 @@
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/colors.css" />
     <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    
 
     <script type="module" defer src="../js/dahsboard/dashboardUser.js"></script>
+    <!-- <script defer src="../js/toast.js"></script> -->
+    <script type="text/javascript" defer src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <title>QubitCompany - Dashboard Usuário</title>
   </head>
@@ -25,8 +29,40 @@
       </div>
     </header>
     <main></main>
-    <section>
-      <h2></h2>
-    </section>
+    <section class="modal-wrapper upgrade hidden">
+      <div id="upgrade">
+        <img
+          id="close_upgrade"
+          class="close button"
+          src="../assets/close.png"
+        />
+        <h2 class="title1 white">Informações do usuário</h2>
+        <form id="upgrade_form">
+          <label class="white" for="username">Nome de usuário</label>
+          <input
+            id="username"
+            class="grey1"
+            type="text"
+            placeholder="Digite o novo nome de usuário"
+          />
+          <label class="white" for="email">E-mail</label>
+          <input
+            id="email"
+            class="grey1"
+            type="text"
+            placeholder="Digite o novo e-mail"
+          />
+          <label class="white" for="password">Senha</label>
+          <input
+            id="password"
+            class="grey1"
+            type="password"
+            placeholder="Digite a nova senha"
+          />
+          <button type="button" id="upgrade-button" class="button grey1 text1">
+            Atualizar dados
+          </button>
+        </form>
+     </section>
   </body>
 </html>

@@ -111,3 +111,7 @@ input {
 .edit_information {
   background-color: var(--primary-dark);
 }
+
+#upgrade {
+  background-color: var(--primary);
+}

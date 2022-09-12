@@ -89,7 +89,7 @@ class DashboardUser {
         }
       );
     } else {
-      company.innerText = `Você não foi contratado ainda ../../assets/emoji-choro.png`;
+      company.innerText = `Você não foi contratado ainda "../assets/emoji-choro.png"`;
     }
 
     main.append(
@@ -100,9 +100,59 @@ class DashboardUser {
       employersList,
       editInformation
     );
+
+    this.openInformations();
+  }
+
+  static openInformations() {
+    const editInformation = document.querySelector(".edit_information");
+    const modal = document.querySelector(".modal-wrapper");
+    const inputUsername = document.querySelector("#username");
+    const inputEmail = document.querySelector("#email");
+    const inputPassword = document.querySelector("#password");
+
+    editInformation.addEventListener("click", async () => {
+      modal.classList.toggle("hidden");
+
+      const logged = await ApiRequests.getUserProfile();
+
+      inputUsername.value = logged.username;
+      inputEmail.value = logged.email;
+
+      this.upgradeInformations();
+    });
+  }
+
+  static async upgradeInformations() {
+    const upgradeButton = document.querySelector("#upgrade-button");
+    const inputUsername = document.querySelector("#username");
+    const inputEmail = document.querySelector("#email");
+    const inputPassword = document.querySelector("#password");
+
+    upgradeButton.addEventListener("click", async (event) => {
+      event.preventDefault;
+
+      const body = {
+        username: inputUsername.value,
+        email: inputEmail.value,
+        password: inputPassword.value,
+      };
+
+      await ApiRequests.upgradeUserData(body);
+    });
+  }
+
+  static closeModal() {
+    const close = document.querySelector("#close_upgrade");
+    const modal = document.querySelector(".modal-wrapper");
+
+    close.addEventListener("click", () => {
+      modal.classList.toggle("hidden");
+    });
   }
 }
 
 DashboardUser.verification();
 DashboardUser.logout();
 DashboardUser.renderUserDashboard();
+DashboardUser.closeModal();
