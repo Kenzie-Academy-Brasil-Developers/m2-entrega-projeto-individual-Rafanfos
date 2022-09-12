@@ -441,6 +441,10 @@ main {
   border: none;
 }
 
+h1 {
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   #sector_list {
     flex-direction: row;
