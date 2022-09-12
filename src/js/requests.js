@@ -227,8 +227,8 @@ export class ApiRequests {
       .catch((erro) => console.log(erro));
   }
 
-  static async getEmployersDepartment() {
-    const employers = await fetch(
+  static async getEmployeesDepartment() {
+    const employees = await fetch(
       `${this.baseUrl}users/departments/coworkers`,
       {
         method: "GET",
@@ -241,7 +241,7 @@ export class ApiRequests {
       })
       .catch((erro) => console.log(erro));
 
-    return employers;
+    return employees;
   }
 
   static async getUserProfile() {
