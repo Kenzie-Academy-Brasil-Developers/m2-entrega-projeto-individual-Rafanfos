@@ -89,7 +89,7 @@ class DashboardUser {
         }
       );
     } else {
-      company.innerText = `Você não foi contratado ainda "../assets/emoji-choro.png"`;
+      company.innerText = `Você não foi contratado ainda :(`;
     }
 
     main.append(
