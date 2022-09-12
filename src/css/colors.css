@@ -21,3 +21,7 @@
 .primary3 {
   color: var(--primary-dark);
 }
+
+select {
+  color: var(--grey1);
+}

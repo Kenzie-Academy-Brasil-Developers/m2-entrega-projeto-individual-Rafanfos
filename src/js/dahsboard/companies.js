@@ -220,8 +220,8 @@ export class Companies {
           const companyName = document.createElement("h3");
           const departmentsTitle = document.createElement("h4");
           const departmentsList = document.createElement("ul");
-          const employersTitle = document.createElement("h4");
-          const employersList = document.createElement("ul");
+          const employeesTitle = document.createElement("h4");
+          const employeesList = document.createElement("ul");
           const openingHours = document.createElement("span");
           const companySector = document.createElement("span");
 
@@ -231,14 +231,17 @@ export class Companies {
           departmentsTitle.classList.add("grey1");
           departmentsTitle.classList.add("text1");
           departmentsList.classList.add("departments_list");
-          employersTitle.classList.add("grey1");
-          employersTitle.classList.add("text1");
+          employeesTitle.classList.add("grey1");
+          employeesTitle.classList.add("text1");
+          employeesList.classList.add("employees_list");
           openingHours.classList.add("text2");
+          openingHours.classList.add("grey1");
           companySector.classList.add("text2");
+          companySector.classList.add("grey1");
 
           companyName.innerText = name;
           departmentsTitle.innerText = "Departamentos";
-          employersTitle.innerText = "Empregados";
+          employeesTitle.innerText = "Empregados";
           openingHours.innerText = `Horário de funcionamento: ${opening_hours}h`;
           companySector.innerText = `Setor: ${sectors.description}`;
 
@@ -247,8 +250,8 @@ export class Companies {
             companyName,
             departmentsTitle,
             departmentsList,
-            employersTitle,
-            employersList,
+            employeesTitle,
+            employeesList,
             openingHours,
             companySector
           );
@@ -274,17 +277,17 @@ export class Companies {
             });
 
             const users = await ApiRequests.getUsers();
-            const employers = [];
+            const employees = [];
 
             departments.forEach(({ uuid }) => {
               users.forEach((user) => {
                 if (user.department_uuid == uuid) {
-                  employers.push(user);
+                  employees.push(user);
                 }
               });
             });
 
-            employers.forEach(
+            employees.forEach(
               ({
                 username,
                 kind_of_work,
@@ -296,14 +299,14 @@ export class Companies {
                 )[0].name;
 
                 const littleCard2 = document.createElement("li");
-                const employerName = document.createElement("span");
+                const employeeName = document.createElement("span");
                 const workDepartment = document.createElement("span");
                 const kindWork = document.createElement("span");
                 const profLevel = document.createElement("span");
 
                 littleCard2.classList.add("card4");
-                employerName.classList.add("text1");
-                employerName.classList.add("white");
+                employeeName.classList.add("text1");
+                employeeName.classList.add("white");
                 workDepartment.classList.add("text2");
                 workDepartment.classList.add("white");
                 kindWork.classList.add("text2");
@@ -311,18 +314,18 @@ export class Companies {
                 profLevel.classList.add("text2");
                 profLevel.classList.add("white");
 
-                employerName.innerText = username;
+                employeeName.innerText = username;
                 workDepartment.innerText = `Departamento: ${departmentName}`;
                 kindWork.innerText = `Regime: ${kind_of_work}`;
                 profLevel.innerText = `Nível: ${professional_level} `;
 
                 littleCard2.append(
-                  employerName,
+                  employeeName,
                   profLevel,
                   workDepartment,
                   kindWork
                 );
-                employersList.append(littleCard2);
+                employeesList.append(littleCard2);
               }
             );
 
