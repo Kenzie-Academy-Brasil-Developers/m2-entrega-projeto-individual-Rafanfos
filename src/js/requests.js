@@ -2,7 +2,7 @@ import { Toast } from "./toast.js";
 
 export class ApiRequests {
   static token = localStorage.getItem("@QubitCompany:token") || "";
-  static baseUrl = "http://localhost:6280/";
+  static baseUrl = "http://localhost:6278/";
   static headers = {
     "Content-type": "application/json",
     Authorization: `Bearer: ${this.token}`,
