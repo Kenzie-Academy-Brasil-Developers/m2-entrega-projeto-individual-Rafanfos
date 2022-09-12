@@ -19,20 +19,20 @@ export class Login {
     });
   }
 
-  static CreateLogin() {
+  static async CreateLogin() {
     const loginButton = document.querySelector("#login-button");
-    const email = document.querySelector("#login_email");
-    const password = document.querySelector("#login_password");
+    const emailLogin = document.querySelector("#login_email");
+    const passwordLogin = document.querySelector("#login_password");
 
     loginButton.addEventListener("click", async (event) => {
       event.preventDefault();
 
       const body = {
-        email: email.value,
-        password: password.value,
+        email: emailLogin.value,
+        password: passwordLogin.value,
       };
 
-      await ApiRequests.loginRequest(body);
+      await ApiRequests.loginRequest(body, "Bem vindo de volta!");
     });
   }
 }

@@ -44,15 +44,18 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.uuid) {
-          return this.loginRequest(loginBody);
+          Toast.createSucess("Cadastro efetuado com sucesso!");
+          setTimeout(() => {
+            return this.loginRequest(loginBody, "Bem vindo!");
+          }, 2000);
         } else {
-          Toast.create("Insira dados válidos!");
+          Toast.createError("Insira dados válidos!");
         }
       })
       .catch((erro) => console.log(erro));
   }
 
-  static async loginRequest(body) {
+  static async loginRequest(body, msg) {
     const loginResp = await fetch(`${this.baseUrl}auth/login`, {
       method: "POST",
       headers: this.headers,
@@ -64,13 +67,17 @@ export class ApiRequests {
           localStorage.setItem("@QubitCompany:token", resp.token);
           localStorage.setItem("@QubitCompany:uuid", resp.uuid);
 
-          if (resp.is_admin) {
-            window.location.replace("./src/pages/dashboardAdmin.html");
-          } else {
-            window.location.replace("./src/pages/dashboardUser.html");
-          }
+          Toast.createSucess(msg);
+
+          setTimeout(() => {
+            if (resp.is_admin) {
+              window.location.replace("./src/pages/dashboardAdmin.html");
+            } else {
+              window.location.replace("./src/pages/dashboardUser.html");
+            }
+          }, 2000);
         } else {
-          Toast.create("Usuário não existente, dados inválidos!");
+          Toast.createError("Usuário não existente, dados inválidos!");
         }
       })
       .catch((erro) => console.log(erro));
@@ -99,7 +106,9 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.error) {
-          Toast.create("Preencha todos os campos!");
+          Toast.createError("Preencha todos os campos!");
+        } else {
+          Toast.createSucess(`${body.name} criada com sucesso!`);
         }
       })
       .catch((erro) => console.log(erro));
@@ -128,7 +137,9 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.error) {
-          Toast.create("Preencha todos os campos!");
+          Toast.createError("Preencha todos os campos!");
+        } else {
+          Toast.createSucess(`Departamento ${body.name.toLowerCase()} criado!`);
         }
       })
       .catch((erro) => console.log(erro));
@@ -169,7 +180,7 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
+        Toast.createError("Departamento apagado!");
       })
       .catch((erro) => console.log(erro));
   }
@@ -196,7 +207,7 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
+        Toast.createSucess("Funcionário contratado!");
       })
       .catch((erro) => console.log(erro));
   }
@@ -209,7 +220,7 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
+        Toast.createError("Funcionário demitido!");
       })
       .catch((erro) => console.log(erro));
   }
@@ -222,7 +233,7 @@ export class ApiRequests {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp);
+        Toast.createSucess("Dados modificados!");
       })
       .catch((erro) => console.log(erro));
   }
@@ -267,9 +278,10 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.error) {
-          Toast.create("E-mail já existente, insira um e-mail novo!");
+          Toast.createError("E-mail já existente, insira um e-mail novo!");
+        } else {
+          Toast.createSucess("Dados atualizados!");
         }
-        console.log(resp);
       })
       .catch((erro) => {
         console.log(erro);

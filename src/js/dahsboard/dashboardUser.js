@@ -29,11 +29,7 @@ class DashboardUser {
     const logged = await ApiRequests.getUserProfile();
     const workDepartment = await ApiRequests.getEmployeesDepartment();
 
-    const workCompany = companies.filter(
-      ({ uuid }) => uuid == workDepartment[0].company_uuid
-    )[0];
-
-    console.log(workDepartment[0].users);
+    console.log(workDepartment);
 
     const main = document.querySelector("main");
 
@@ -58,12 +54,14 @@ class DashboardUser {
     editInformation.classList.add("edit_information");
 
     greetings.innerText = `Bem vindo ${logged.username}!`;
-    team.innerText = `Equipe:`;
     editInformation.innerText = "Editar informações pessoais";
 
-    if (workCompany) {
+    if (workDepartment.length > 0) {
+      const workCompany = companies.filter(
+        ({ uuid }) => uuid == workDepartment[0].company_uuid
+      )[0];
       company.innerText = `Trabalha em: ${workCompany.name}`;
-
+      team.innerText = `Equipe:`;
       department.innerText = `No departamento: ${workDepartment[0].name}`;
       workDepartment[0].users.forEach(
         ({ username, professional_level, kind_of_work }) => {
