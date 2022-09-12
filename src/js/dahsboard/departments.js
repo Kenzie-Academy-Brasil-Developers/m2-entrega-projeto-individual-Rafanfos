@@ -716,7 +716,7 @@ export class Departments {
           this.openHireModal(body);
           this.closeModalHire();
         } else {
-          Toast.create("Selecione uma empresa e um departamento!");
+          Toast.createError("Selecione uma empresa e um departamento!");
         }
       }
     });
