@@ -477,6 +477,10 @@ h1 {
     width: 80px;
   }
 
+  .employees_list {
+    height: 200px;
+  }
+
   .card4 {
     min-width: 200px;
   }

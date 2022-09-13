@@ -348,10 +348,13 @@ export class Departments {
       modal.classList.toggle("hidden");
 
       const yes = document.querySelector("#yes_delete");
-      const no = document.querySelector("#yes_delete");
+      const no = document.querySelector("#no_delete");
 
       yes.addEventListener("click", async () => {
         await ApiRequests.deleteDepartmentRequest(id);
+        setTimeout(() => {
+          modal.classList.toggle("hidden");
+        }, 2000);
       });
 
       no.addEventListener("click", () => {
@@ -361,7 +364,7 @@ export class Departments {
   }
 
   static closeModalDelete() {
-    const close = document.querySelector("#delete_close");
+    const close = document.querySelector("#close-delete");
     const modal = document.querySelector(".delete_verification");
 
     close.addEventListener("click", () => {
@@ -730,6 +733,9 @@ export class Departments {
 
     yes.addEventListener("click", async () => {
       await ApiRequests.hireRequest(body);
+      setTimeout(() => {
+        modal.classList.toggle("hidden");
+      }, 2000);
     });
 
     no.addEventListener("click", () => {
@@ -912,6 +918,9 @@ export class Departments {
 
     yes.addEventListener("click", async () => {
       await ApiRequests.fireRequest(id);
+      setTimeout(() => {
+        modal.classList.toggle("hidden");
+      }, 2000);
     });
 
     no.addEventListener("click", () => {
@@ -1077,6 +1086,9 @@ export class Departments {
 
     yes.addEventListener("click", async () => {
       await ApiRequests.modifyRequest(userId, body);
+      setTimeout(() => {
+        modal.classList.toggle("hidden");
+      }, 2000);
     });
 
     no.addEventListener("click", () => {

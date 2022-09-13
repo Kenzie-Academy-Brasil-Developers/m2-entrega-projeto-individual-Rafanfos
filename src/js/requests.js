@@ -13,8 +13,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return companies;
   }
@@ -24,8 +23,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return sectors;
   }
@@ -51,8 +49,7 @@ export class ApiRequests {
         } else {
           Toast.createError("Insira dados válidos!");
         }
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async loginRequest(body, msg) {
@@ -79,8 +76,7 @@ export class ApiRequests {
         } else {
           Toast.createError("Usuário não existente, dados inválidos!");
         }
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async getSectors() {
@@ -91,8 +87,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return sectors;
   }
@@ -110,8 +105,7 @@ export class ApiRequests {
         } else {
           Toast.createSucess(`${body.name} criada com sucesso!`);
         }
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async getUsers() {
@@ -122,8 +116,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return users;
   }
@@ -141,8 +134,7 @@ export class ApiRequests {
         } else {
           Toast.createSucess(`Departamento ${body.name.toLowerCase()} criado!`);
         }
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async allDepartments() {
@@ -153,8 +145,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return departments;
   }
@@ -167,8 +158,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return departments;
   }
@@ -181,8 +171,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         Toast.createError("Departamento apagado!");
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async getWaitList() {
@@ -193,8 +182,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return waitList;
   }
@@ -208,21 +196,18 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         Toast.createSucess("Funcionário contratado!");
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async fireRequest(id) {
     await fetch(`${this.baseUrl}departments/dismiss/${id}`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
       .then((resp) => {
         Toast.createError("Funcionário demitido!");
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async modifyRequest(id, body) {
@@ -234,8 +219,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         Toast.createSucess("Dados modificados!");
-      })
-      .catch((erro) => console.log(erro));
+      });
   }
 
   static async getEmployeesDepartment() {
@@ -249,8 +233,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return employees;
   }
@@ -263,8 +246,7 @@ export class ApiRequests {
       .then((resp) => resp.json())
       .then((resp) => {
         return resp;
-      })
-      .catch((erro) => console.log(erro));
+      });
 
     return user;
   }
@@ -281,10 +263,10 @@ export class ApiRequests {
           Toast.createError("E-mail já existente, insira um e-mail novo!");
         } else {
           Toast.createSucess("Dados atualizados!");
+          setTimeout(() => {
+            window.location.reload(true);
+          }, 2000);
         }
-      })
-      .catch((erro) => {
-        console.log(erro);
       });
   }
 }

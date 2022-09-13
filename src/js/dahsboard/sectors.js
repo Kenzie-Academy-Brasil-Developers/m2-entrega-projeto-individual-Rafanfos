@@ -32,7 +32,7 @@ export class Sectors {
 
         this.listSectors();
         this.returnMain();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -89,7 +89,7 @@ export class Sectors {
         });
         actions.append(returnButton);
         this.returnToMenu();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -136,7 +136,7 @@ export class Sectors {
         this.openSectors();
         Companies.openCompanies();
         Departments.openDepartments();
-      }, 2000);
+      }, 1000);
     });
   }
 }
