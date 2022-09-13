@@ -352,6 +352,9 @@ export class Departments {
 
       yes.addEventListener("click", async () => {
         await ApiRequests.deleteDepartmentRequest(id);
+        setTimeout(() => {
+          modal.classList.toggle("hidden");
+        }, 2000);
       });
 
       no.addEventListener("click", () => {
@@ -730,6 +733,9 @@ export class Departments {
 
     yes.addEventListener("click", async () => {
       await ApiRequests.hireRequest(body);
+      setTimeout(() => {
+        modal.classList.toggle("hidden");
+      }, 2000);
     });
 
     no.addEventListener("click", () => {
@@ -912,6 +918,9 @@ export class Departments {
 
     yes.addEventListener("click", async () => {
       await ApiRequests.fireRequest(id);
+      setTimeout(() => {
+        modal.classList.toggle("hidden");
+      }, 2000);
     });
 
     no.addEventListener("click", () => {
@@ -1077,6 +1086,9 @@ export class Departments {
 
     yes.addEventListener("click", async () => {
       await ApiRequests.modifyRequest(userId, body);
+      setTimeout(() => {
+        modal.classList.toggle("hidden");
+      }, 2000);
     });
 
     no.addEventListener("click", () => {

@@ -160,7 +160,7 @@ export class Companies {
         actions.append(companyForm);
 
         this.createCompany();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -333,7 +333,7 @@ export class Companies {
             this.returnToMenu2();
           }
         });
-      }, 2000);
+      }, 1000);
     });
   }
   static returnToMenu2() {
@@ -377,7 +377,7 @@ export class Companies {
 
         Sectors.openSectors();
         this.openCompanies();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -413,7 +413,7 @@ export class Companies {
 
         this.listCompany();
         this.returnToMenu2();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -485,7 +485,7 @@ export class Companies {
         filterArea.append(filterTitle, filterSector);
         actions.append(filterArea);
         this.filterBySector();
-      }, 2000);
+      }, 1000);
     });
   }
 

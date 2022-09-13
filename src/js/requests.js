@@ -216,7 +216,6 @@ export class ApiRequests {
     await fetch(`${this.baseUrl}departments/dismiss/${id}`, {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
       .then((resp) => {

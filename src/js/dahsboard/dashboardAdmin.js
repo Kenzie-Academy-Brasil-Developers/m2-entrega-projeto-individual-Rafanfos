@@ -61,7 +61,7 @@ export class DashboardAdmin {
         Sectors.openSectors();
         Companies.openCompanies();
         Departments.openDepartments();
-      }, 2000);
+      }, 1000);
     });
   }
 
