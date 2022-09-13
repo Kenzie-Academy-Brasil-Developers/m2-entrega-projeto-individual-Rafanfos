@@ -63,9 +63,9 @@ export class Companies {
 
   static async returnMain() {
     const returnMain = document.querySelector("#return_main");
-    const actionsList = document.querySelector("#actions_list");
+    const actions = document.querySelector(".actions");
 
-    DashboardAdmin.createMenu(returnMain, actionsList);
+    DashboardAdmin.createMenu(returnMain, actions);
   }
 
   static async createCompanyForm() {
@@ -160,7 +160,7 @@ export class Companies {
         actions.append(companyForm);
 
         this.createCompany();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -212,7 +212,8 @@ export class Companies {
 
         returnButton.classList.add("button");
         returnButton.classList.add("white");
-        returnButton.id = "return_menu";
+        returnButton.classList.add("return_menu");
+        returnButton.id = "return_main";
         returnButton.innerText = "Voltar";
 
         companies.forEach(async ({ uuid, name, opening_hours, sectors }) => {
@@ -330,10 +331,10 @@ export class Companies {
             );
 
             actions.append(companiesList, returnButton);
-            this.returnToMenu2();
+            this.returnMain();
           }
         });
-      }, 2000);
+      }, 1000);
     });
   }
   static returnToMenu2() {
@@ -377,7 +378,7 @@ export class Companies {
 
         Sectors.openSectors();
         this.openCompanies();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -413,7 +414,7 @@ export class Companies {
 
         this.listCompany();
         this.returnToMenu2();
-      }, 2000);
+      }, 1000);
     });
   }
 
@@ -485,7 +486,7 @@ export class Companies {
         filterArea.append(filterTitle, filterSector);
         actions.append(filterArea);
         this.filterBySector();
-      }, 2000);
+      }, 1000);
     });
   }
 

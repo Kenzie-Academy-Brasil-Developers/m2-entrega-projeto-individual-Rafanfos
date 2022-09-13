@@ -79,7 +79,7 @@ input {
 }
 
 .return_menu:hover {
-  background-color: var(--primary);
+  background-color: var(--primary-light);
 }
 
 .delete_button {
@@ -131,4 +131,8 @@ input {
 
 #companies {
   background-color: var(--default);
+}
+
+select {
+  background-color: var(--grey-3);
 }
