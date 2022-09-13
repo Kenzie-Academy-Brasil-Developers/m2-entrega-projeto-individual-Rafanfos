@@ -132,3 +132,7 @@ input {
 #companies {
   background-color: var(--default);
 }
+
+select {
+  background-color: var(--grey-3);
+}
