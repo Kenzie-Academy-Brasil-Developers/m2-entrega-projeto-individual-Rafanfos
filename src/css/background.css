@@ -79,7 +79,7 @@ input {
 }
 
 .return_menu:hover {
-  background-color: var(--primary);
+  background-color: var(--primary-light);
 }
 
 .delete_button {
